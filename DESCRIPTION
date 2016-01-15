@@ -1,0 +1,17 @@
+Package: subcon
+Type: Package
+Title: Collection of subspace search functions
+Version: 0.0.0.9000
+Date: 2016-01-13
+Authors@R: person("Holger", "Trittenbach", email = "holger.trittenbach@gmail.com",
+                  role=c("aut", "cre"))
+Maintainer: Holger Trittenbach <holger.trittenbach@gmail.com>
+Description: This package implements statistics and algorithms that can be used
+    for subspace search in high dimensional data sets.
+License: tbd
+LazyData: TRUE
+Imports:
+    Rcpp (>= 0.12.2),
+    data.table
+LinkingTo: Rcpp
+RoxygenNote: 5.0.0
