@@ -50,7 +50,6 @@ double KSTestC(LogicalVector indexSelection, NumericVector indexMapReferenceAttr
 //' @return Logical Vector indicating which data objects remain in the subspace slice.
 //' @seealso \code{\link{sortedIndexMatrix}}
 //' @export
-//'
 // [[Rcpp::export]]
 LogicalVector randomSubspaceSliceC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim) {
   int sliceSize = std::ceil(indexMap.rows() * (std::pow(alpha,(1.0/(subspace.size()-1)))));
@@ -146,6 +145,8 @@ double HiCSContrastC(NumericMatrix indexMap, NumericVector subspace, double alph
 // [[Rcpp::export]]
 NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns){
   NumericMatrix out(indexMap.ncol(), indexMap.ncol());
+  colnames(out) = colnames(indexMap);
+  rownames(out) = colnames(indexMap);
 
   for(int i=0; i< out.ncol(); i++){
     for(int j=0; j< out.ncol(); j++){
@@ -179,6 +180,8 @@ NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns
 // [[Rcpp::export]]
 NumericMatrix HiCSMatrixC(NumericMatrix indexMap, double alpha, int numRuns){
   NumericMatrix out(indexMap.ncol(), indexMap.ncol());
+  colnames(out) = colnames(indexMap);
+  rownames(out) = colnames(indexMap);
 
   for(int i=0; i< out.ncol(); i++){
     for(int j=i; j< out.ncol(); j++){

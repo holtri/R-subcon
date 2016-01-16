@@ -54,7 +54,8 @@ sortedIndex <- function(dt){
 #' @return \code{\link{sortedIndex}} converted to a matrix
 #' @export
 sortedIndexMatrix <- function(dt){
-  as.matrix(sortedIndex(dt))
+  res <- as.matrix(sortedIndex(dt))
+  colnames(res) <- colnames(dt)
 }
 
 randomSubspaceSlice <- function(indexMap, subspace, alpha, referenceDim){

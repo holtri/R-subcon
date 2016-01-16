@@ -34,7 +34,6 @@ KSTestC <- function(indexSelection, indexMapReferenceAttribute) {
 #' @return Logical Vector indicating which data objects remain in the subspace slice.
 #' @seealso \code{\link{sortedIndexMatrix}}
 #' @export
-#'
 randomSubspaceSliceC <- function(indexMap, subspace, alpha, referenceDim) {
     .Call('subcon_randomSubspaceSliceC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim)
 }
@@ -81,10 +80,41 @@ HiCSContrastC <- function(indexMap, subspace, alpha, numRuns) {
     .Call('subcon_HiCSContrastC', PACKAGE = 'subcon', indexMap, subspace, alpha, numRuns)
 }
 
+#' Deviation matrix
+#'
+#' Calculates the deviation for all 2-dimensional projections of the full
+#' space.
+#'
+#' @param indexMap Index for the data objects if ordered by dimension. Each
+#'   entry of the vector contains the index to the initial data set. The index
+#'   is starting with 1.
+#' @param alpha Percentage of data objects to remain in the subspace slice
+#'   (expected value).
+#' @param numRuns number of random subspace slices used to estimate the
+#'   deviation.
+#' @return NumericMatrix with deviations where the row is the reference
+#'   attribute, column the conditional attribute of the 2-dimensional subspace.
+#'   This matrix is asymmetric in general.
+#' @export
 deviationMatrixC <- function(indexMap, alpha, numRuns) {
     .Call('subcon_deviationMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
 }
 
+#' HiCS matrix
+#'
+#' Calculates the HiCS contrast for all 2-dimensional projections of the full
+#' space.
+#'
+#' @param indexMap Index for the data objects if ordered by dimension. Each
+#'   entry of the vector contains the index to the initial data set. The index
+#'   is starting with 1.
+#' @param alpha Percentage of data objects to remain in the subspace slice
+#'   (expected value).
+#' @param numRuns number of random subspace slices used to estimate the
+#'   deviation.
+#' @return Symmetric NumericMatrix with HiCS contrast that is the average
+#'   deviation when the reference dimension is selected randomly.
+#' @export
 HiCSMatrixC <- function(indexMap, alpha, numRuns) {
     .Call('subcon_HiCSMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
 }
