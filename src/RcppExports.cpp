@@ -60,3 +60,29 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// deviationMatrixC
+NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns);
+RcppExport SEXP subcon_deviationMatrixC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type indexMap(indexMapSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
+    __result = Rcpp::wrap(deviationMatrixC(indexMap, alpha, numRuns));
+    return __result;
+END_RCPP
+}
+// HiCSMatrixC
+NumericMatrix HiCSMatrixC(NumericMatrix indexMap, double alpha, int numRuns);
+RcppExport SEXP subcon_HiCSMatrixC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type indexMap(indexMapSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
+    __result = Rcpp::wrap(HiCSMatrixC(indexMap, alpha, numRuns));
+    return __result;
+END_RCPP
+}

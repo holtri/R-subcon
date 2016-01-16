@@ -126,6 +126,71 @@ double HiCSContrastC(NumericMatrix indexMap, NumericVector subspace, double alph
   return result/numRuns;
 }
 
-//HiCSMatrix
 
-//DeviationMatrix
+//' Deviation matrix
+//'
+//' Calculates the deviation for all 2-dimensional projections of the full
+//' space.
+//'
+//' @param indexMap Index for the data objects if ordered by dimension. Each
+//'   entry of the vector contains the index to the initial data set. The index
+//'   is starting with 1.
+//' @param alpha Percentage of data objects to remain in the subspace slice
+//'   (expected value).
+//' @param numRuns number of random subspace slices used to estimate the
+//'   deviation.
+//' @return NumericMatrix with deviations where the row is the reference
+//'   attribute, column the conditional attribute of the 2-dimensional subspace.
+//'   This matrix is asymmetric in general.
+//' @export
+// [[Rcpp::export]]
+NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns){
+  NumericMatrix out(indexMap.ncol(), indexMap.ncol());
+
+  for(int i=0; i< out.ncol(); i++){
+    for(int j=0; j< out.ncol(); j++){
+      if(i==j){
+        out(i,j) = 0;
+      }
+      else{
+        NumericVector subspace = NumericVector::create(i+1,j+1);
+        out(i,j) = deviationC(indexMap, subspace, alpha, i+1, numRuns);
+      }
+    }
+  }
+  return out;
+}
+
+//' HiCS matrix
+//'
+//' Calculates the HiCS contrast for all 2-dimensional projections of the full
+//' space.
+//'
+//' @param indexMap Index for the data objects if ordered by dimension. Each
+//'   entry of the vector contains the index to the initial data set. The index
+//'   is starting with 1.
+//' @param alpha Percentage of data objects to remain in the subspace slice
+//'   (expected value).
+//' @param numRuns number of random subspace slices used to estimate the
+//'   deviation.
+//' @return Symmetric NumericMatrix with HiCS contrast that is the average
+//'   deviation when the reference dimension is selected randomly.
+//' @export
+// [[Rcpp::export]]
+NumericMatrix HiCSMatrixC(NumericMatrix indexMap, double alpha, int numRuns){
+  NumericMatrix out(indexMap.ncol(), indexMap.ncol());
+
+  for(int i=0; i< out.ncol(); i++){
+    for(int j=i; j< out.ncol(); j++){
+      if(i==j){
+        out(i,j) = 0;
+      }
+      else{
+        NumericVector subspace = NumericVector::create(i+1,j+1);
+        out(i,j) = HiCSContrastC(indexMap, subspace, alpha, numRuns);
+        out(j,i) = out(i,j);
+      }
+    }
+  }
+  return out;
+}

@@ -81,3 +81,11 @@ HiCSContrastC <- function(indexMap, subspace, alpha, numRuns) {
     .Call('subcon_HiCSContrastC', PACKAGE = 'subcon', indexMap, subspace, alpha, numRuns)
 }
 
+deviationMatrixC <- function(indexMap, alpha, numRuns) {
+    .Call('subcon_deviationMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+}
+
+HiCSMatrixC <- function(indexMap, alpha, numRuns) {
+    .Call('subcon_HiCSMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+}
+
