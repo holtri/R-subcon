@@ -57,8 +57,12 @@ randomSubspaceSliceC <- function(indexMap, subspace, alpha, referenceDim) {
 #' @return double, the deviation for the reference dimension.
 #' @seealso \code{\link{sortedIndexMatrix}}
 #' @export
-deviationC <- function(indexMap, subspace, alpha, referenceDim, numRuns) {
-    .Call('subcon_deviationC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim, numRuns)
+averageDeviationC <- function(indexMap, subspace, alpha, referenceDim, numRuns) {
+    .Call('subcon_averageDeviationC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim, numRuns)
+}
+
+deviationVectorC <- function(indexMap, subspace, alpha, referenceDim, numRuns) {
+    .Call('subcon_deviationVectorC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim, numRuns)
 }
 
 #' HiCS contrast
