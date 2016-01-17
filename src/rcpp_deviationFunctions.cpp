@@ -109,28 +109,6 @@ NumericVector deviationVectorC(NumericMatrix indexMap, NumericVector subspace, d
   return result;
 }
 
-<<<<<<< HEAD
-=======
-// [[Rcpp::export]]
-NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns){
-  NumericMatrix out(indexMap.ncol(), indexMap.ncol());
-  colnames(out) = colnames(indexMap);
-  rownames(out) = colnames(indexMap);
-
-  for(int i=0; i< out.ncol(); i++){
-    for(int j=0; j< out.ncol(); j++){
-      if(i==j){
-        out(i,j) = 0;
-      }
-      else{
-        NumericVector subspace = NumericVector::create(i+1,j+1);
-        out(i,j) = averageDeviationC(indexMap, subspace, alpha, i+1, numRuns);
-      }
-    }
-  }
-  return out;
-}
->>>>>>> 1aa72c6fc1de526fd0ff8aae971280c461766ae5
 
 //' HiCS contrast
 //'
