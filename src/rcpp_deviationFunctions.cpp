@@ -92,13 +92,23 @@ LogicalVector randomSubspaceSliceC(NumericMatrix indexMap, NumericVector subspac
 //' @seealso \code{\link{sortedIndexMatrix}}
 //' @export
 // [[Rcpp::export]]
-double deviationC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns){
+double averageDeviationC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns){
   double result = 0;
   for(int i=0; i<numRuns; i++){
     result += KSTestC(randomSubspaceSliceC(indexMap, subspace, alpha, referenceDim), indexMap.column(referenceDim - 1));
   }
   return result/numRuns;
 }
+
+// [[Rcpp::export]]
+NumericVector deviationVectorC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns){
+  NumericVector result(numRuns);
+  for(int i=0; i<numRuns; i++){
+    result[i] = KSTestC(randomSubspaceSliceC(indexMap, subspace, alpha, referenceDim), indexMap.column(referenceDim - 1));
+  }
+  return result;
+}
+
 
 //' HiCS contrast
 //'
@@ -155,7 +165,7 @@ NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns
       }
       else{
         NumericVector subspace = NumericVector::create(i+1,j+1);
-        out(i,j) = deviationC(indexMap, subspace, alpha, i+1, numRuns);
+        out(i,j) = averageDeviationC(indexMap, subspace, alpha, i+1, numRuns);
       }
     }
   }

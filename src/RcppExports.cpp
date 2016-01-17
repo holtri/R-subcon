@@ -31,9 +31,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// deviationC
-double deviationC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns);
-RcppExport SEXP subcon_deviationC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
+// averageDeviationC
+double averageDeviationC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns);
+RcppExport SEXP subcon_averageDeviationC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -42,7 +42,22 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< int >::type referenceDim(referenceDimSEXP);
     Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
-    __result = Rcpp::wrap(deviationC(indexMap, subspace, alpha, referenceDim, numRuns));
+    __result = Rcpp::wrap(averageDeviationC(indexMap, subspace, alpha, referenceDim, numRuns));
+    return __result;
+END_RCPP
+}
+// deviationVectorC
+NumericVector deviationVectorC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns);
+RcppExport SEXP subcon_deviationVectorC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type indexMap(indexMapSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type subspace(subspaceSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type referenceDim(referenceDimSEXP);
+    Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
+    __result = Rcpp::wrap(deviationVectorC(indexMap, subspace, alpha, referenceDim, numRuns));
     return __result;
 END_RCPP
 }
