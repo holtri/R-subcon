@@ -61,6 +61,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// deviationStatisticsC
+List deviationStatisticsC(NumericMatrix indexMap, double alpha, int numRuns);
+RcppExport SEXP subcon_deviationStatisticsC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type indexMap(indexMapSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
+    __result = Rcpp::wrap(deviationStatisticsC(indexMap, alpha, numRuns));
+    return __result;
+END_RCPP
+}
 // HiCSContrastC
 double HiCSContrastC(NumericMatrix indexMap, NumericVector subspace, double alpha, int numRuns);
 RcppExport SEXP subcon_HiCSContrastC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {

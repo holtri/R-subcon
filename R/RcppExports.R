@@ -65,6 +65,10 @@ deviationVectorC <- function(indexMap, subspace, alpha, referenceDim, numRuns) {
     .Call('subcon_deviationVectorC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim, numRuns)
 }
 
+deviationStatisticsC <- function(indexMap, alpha, numRuns) {
+    .Call('subcon_deviationStatisticsC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+}
+
 #' HiCS contrast
 #'
 #' Calculates the HiCS contrast for a given subspace.

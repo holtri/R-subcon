@@ -109,6 +109,32 @@ NumericVector deviationVectorC(NumericMatrix indexMap, NumericVector subspace, d
   return result;
 }
 
+// [[Rcpp::export]]
+List deviationStatisticsC(NumericMatrix indexMap, double alpha, int numRuns){
+  NumericMatrix outAverage(indexMap.ncol(), indexMap.ncol());
+  colnames(outAverage) = colnames(indexMap);
+  rownames(outAverage) = colnames(indexMap);
+
+  NumericMatrix outSD(indexMap.ncol(), indexMap.ncol());
+  colnames(outSD) = colnames(indexMap);
+  rownames(outSD) = colnames(indexMap);
+
+  for(int i=0; i< outAverage.ncol(); i++){
+    for(int j=0; j< outAverage.ncol(); j++){
+      if(i==j){
+        outAverage(i,j) = 0;
+      }
+      else{
+        NumericVector subspace = NumericVector::create(i+1,j+1);
+        NumericVector deviatioVector = deviationVectorC(indexMap, subspace, alpha, i+1, numRuns);
+        outAverage(i,j) = mean(deviatioVector);
+        outSD(i,j) = sd(deviatioVector);
+      }
+    }
+  }
+  return List::create(Named("avg") = outAverage, Named("sd") = outSD);
+}
+
 
 //' HiCS contrast
 //'
