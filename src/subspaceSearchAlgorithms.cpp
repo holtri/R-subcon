@@ -41,14 +41,5 @@ std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns
     }
     outputSpaces[refDim] = Rcpp::wrap(subspace);
   }
-
-  // return List::create(_["subspaces"] = outputSpaces, _["referenceDim"]);
   return outputSpaces;
 }
-
-//   outputSpaces.push_back(LogicalVector::create(1,0,0,1));
-//   outputSpaces.push_back(LogicalVector::create(1,0,1,0));
-//   List deviationTwoDim = deviationStatisticsC(indexMap, alpha, numRuns);
-//
-//   double avg = m(1,2);
-//   Rcout << avg << std::endl;
