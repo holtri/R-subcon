@@ -3,12 +3,24 @@ R package for subspace search
 
 This package is an early stage and under development. 
 
+## Installation
+
+Install devtools https://github.com/hadley/devtools
+```R
+#as the package uses Rcpp with c++11, you might be required to set compiler options manually
+Sys.setenv("PKG_CXXFLAGS"="-std=c++0x")
+#
+devtools::install_github("holtri/R-subcon")
+```
+
+
 ## Quick start
 
 Deviation measures 
 
-```
-require(data.table)
+```R
+library(data.table)
+library(subcon)
 
 #generate sample data
 dt <- data.table(replicate(10,runif(100)))
@@ -28,13 +40,14 @@ HiCSMatrixC(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 
 Subspace search algorithms
 
-```
+```R
 
 #Greedy maximum heuristic
 
 GMD(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 
 ```
+##References
 
 The package contains functions to search for subspaces in high dimensional data bases. The contrast defintion used in the code is based on [HiCS - High Contrast Subspaces for Density Based Outlier Ranking][1].
 
