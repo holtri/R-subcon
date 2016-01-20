@@ -52,6 +52,7 @@ double KSTestC(LogicalVector indexSelection, NumericVector indexMapReferenceAttr
 //' @export
 // [[Rcpp::export]]
 LogicalVector randomSubspaceSliceC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim) {
+
   int sliceSize = std::ceil(indexMap.rows() * (std::pow(alpha,(1.0/(subspace.size()-1)))));
   LogicalVector selectionAll(indexMap.rows());
   selectionAll.fill(1);

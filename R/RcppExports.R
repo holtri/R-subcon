@@ -127,3 +127,7 @@ HiCSMatrixC <- function(indexMap, alpha, numRuns) {
     .Call('subcon_HiCSMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
 }
 
+GMD <- function(indexMap, alpha, numRuns) {
+    .Call('subcon_GMD', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+}
+
