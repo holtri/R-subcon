@@ -5,11 +5,13 @@ This package is an early stage and under development.
 
 ## Installation
 
-Prerequisites:
+*Prerequisites*
 
 Install RTools https://cran.r-project.org/bin/windows/Rtools/
+
 Install devtools https://github.com/hadley/devtools
 
+*Package installation from github*
 ```R
 #as the package uses Rcpp with c++11, you might be required to set compiler options manually
 Sys.setenv("PKG_CXXFLAGS"="-std=c++0x")
@@ -20,13 +22,13 @@ devtools::install_github("holtri/R-subcon")
 
 ## Quick start
 
-Overview of functionality 
+*Overview of functionality*
 
 ```R
 ?subcon
 ```
 
-Deviation measures 
+*Deviation measures*
 
 ```R
 library(data.table)
@@ -48,7 +50,7 @@ deviationMatrixC(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 HiCSMatrixC(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 ```
 
-Subspace search algorithms
+*Subspace search algorithms*
 
 ```R
 
