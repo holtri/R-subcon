@@ -1,9 +1,6 @@
 #include <Rcpp.h>
-
+#include "deviationFunctions.h"
 using namespace Rcpp;
-
-List deviationStatisticsC(NumericMatrix indexMap, double alpha, int numRuns);
-double averageDeviationC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns);
 
 //Sys.setenv("PKG_CXXFLAGS"="-std=c++0x")
 //Sys.unsetenv('PKG_CXXFLAGS')
@@ -17,7 +14,6 @@ std::vector<int> sortIndices(const NumericVector &input){
   return idx;
 }
 
-// [[Rcpp::export]]
 std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns){
 
   std::vector<NumericVector> outputSpaces(indexMap.ncol());
