@@ -56,6 +56,7 @@ sortedIndex <- function(dt){
 sortedIndexMatrix <- function(dt){
   res <- as.matrix(sortedIndex(dt))
   colnames(res) <- colnames(dt)
+  res
 }
 
 randomSubspaceSlice <- function(indexMap, subspace, alpha, referenceDim){
