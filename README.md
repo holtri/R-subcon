@@ -20,6 +20,12 @@ devtools::install_github("holtri/R-subcon")
 
 ## Quick start
 
+Overview of functionality 
+
+```R
+?subcon
+```
+
 Deviation measures 
 
 ```R
@@ -51,6 +57,7 @@ Subspace search algorithms
 GMD(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 
 ```
+
 ##References
 
 The package contains functions to search for subspaces in high dimensional data bases. The contrast defintion used in the code is based on [HiCS - High Contrast Subspaces for Density Based Outlier Ranking][1].

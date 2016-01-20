@@ -132,14 +132,13 @@ HiCSMatrixC <- function(indexMap, alpha, numRuns) {
 #' Constructs one deviation maximizing subspace for each dimension. The search
 #' is based on the two dimensional deviations. For each dimension r, the
 #' heuristic orders the two dimensional projections [r, s_i] by deviation, with
-#' s_i being the conditional attribute. It then starts with the highest two
+#' s_i being the conditional attribute. The search starts with the highest two
 #' dimensional projection as the initial subspace. The next candidate to be
 #' added to that subspace is the dimension that has the second highest
-#' deviation in the two-dimensional projections. If the deviation for r
-#' increases by adding a dimension, the subspace will be increased, else that
-#' dimension is discarded.
+#' deviation. If the deviation for r increases by adding a dimension, the
+#' subspace will be updated, else that dimension is discarded.
 #'
-#' Example:
+#' @examples
 #'
 #' reference dimension: 1
 #' 2-dim projections (ordered by deviation):
