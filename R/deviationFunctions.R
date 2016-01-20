@@ -1,31 +1,4 @@
 
-deviation <- function(indexMap, subspace, referenceDim, alpha, numRuns){
-  .Deprecated("deviationC")
-  res <- 0
-  for(i in 1:numRuns){
-    res = res + KSTest(randomSubspaceSlice(indexMap, subspace, alpha, referenceDim), indexMap[,referenceDim, with=F][[1]])
-  }
-  res/numRuns
-}
-
-KSTest <- function(indexSelection, indexMapReferenceAttribute){
-  .Deprecated("KSTestC")
-  cumDistSubspace <- 0
-  cumDistOriginal <- 0
-  maxDistance <- 0
-  numRemaining <- sum(indexSelection,na.rm = TRUE)
-  numTotal <- length(indexSelection)
-
-  for(i in 1:length(indexMapReferenceAttribute)){
-    cumDistOriginal = (i+1)/numTotal
-    if(indexSelection[indexMapReferenceAttribute[i]]){
-      cumDistSubspace = cumDistSubspace + 1/numRemaining
-    }
-    maxDistance <- max(maxDistance, abs(cumDistSubspace - cumDistOriginal))
-  }
-  maxDistance
-}
-
 #' Index map for data set
 #'
 #' The index map allows to create subspace slices without working on the underlying data set but rather on the ordered index.
@@ -59,17 +32,3 @@ sortedIndexMatrix <- function(dt){
   res
 }
 
-randomSubspaceSlice <- function(indexMap, subspace, alpha, referenceDim){
-  .Deprecated("randomSubspaceSliceC")
-  sliceSize <- ceiling(nrow(indexMap) * (alpha ^ (1/(length(subspace)-1))))
-  selectionAll <- rep(T,nrow(indexMap))
-
-  for(dim in subspace){
-    if(dim != referenceDim){
-      l <- ceiling(runif(1,1,nrow(indexMap)-sliceSize))
-      r <- l + sliceSize
-      selectionAll[indexMap[-(l:r), dim, with=F][[1]]] <- F
-    }
-  }
-  selectionAll
-}
