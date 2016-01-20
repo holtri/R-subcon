@@ -5,14 +5,18 @@ This package is an early stage and under development.
 
 ## Installation
 
+Prerequisites:
+
+Install RTools https://cran.r-project.org/bin/windows/Rtools/
 Install devtools https://github.com/hadley/devtools
+
 ```R
 #as the package uses Rcpp with c++11, you might be required to set compiler options manually
 Sys.setenv("PKG_CXXFLAGS"="-std=c++0x")
-#
+
+library(devtools)
 devtools::install_github("holtri/R-subcon")
 ```
-
 
 ## Quick start
 
@@ -30,7 +34,7 @@ indexMatrix <- sortedIndexMatrix(dt)
 
 #deviation
 averageDeviationC(indexMap = indexMatrix, subspace = c(1,2), alpha = 0.1, referenceDim = 1, numRuns = 100)
-HiCSContrastC(indexMap = indexMatrix, subspace = c(1,2), alpha = 0.1, referenceDim = 1, numRuns = 100)
+HiCSContrastC(indexMap = indexMatrix, subspace = c(1,2), alpha = 0.1, numRuns = 100)
 
 #all two dimensional projections
 
