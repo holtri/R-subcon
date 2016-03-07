@@ -171,7 +171,7 @@ HiCSMatrixC <- function(indexMap, alpha, numRuns) {
 #'   (expected value).
 #' @param numRuns number of random subspace slices used to estimate the
 #'   deviation.
-#' @return List of subspaces for each reference dimension.
+#' @return List of deviation maximizing subspaces, one for each reference dimension.
 #' @export
 GMD <- function(indexMap, alpha, numRuns) {
     .Call('subcon_GMD', PACKAGE = 'subcon', indexMap, alpha, numRuns)

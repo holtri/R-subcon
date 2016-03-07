@@ -18,7 +18,7 @@ is starting with 1.}
 deviation.}
 }
 \value{
-List of subspaces for each reference dimension.
+List of deviation maximizing subspaces, one for each reference dimension.
 }
 \description{
 Constructs one deviation maximizing subspace for each dimension. The search

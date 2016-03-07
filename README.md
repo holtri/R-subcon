@@ -66,7 +66,7 @@ GMD(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 
 The package contains functions to search for subspaces in high dimensional data bases. The contrast defintion used in the code is based on [HiCS - High Contrast Subspaces for Density Based Outlier Ranking][1].
 
-Implementation is inspired by the [nim implementation of the HiCS search][2].
+Implementation of HiCS and deviation functions is inspired by the [nim implementation of the HiCS search][2].
 
 [1]: http://www.ipd.uni-karlsruhe.de/~muellere/publications/ICDE2012.pdf 
 [2]: https://github.com/bluenote10/HiCS

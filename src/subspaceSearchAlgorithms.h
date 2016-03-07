@@ -49,7 +49,7 @@ std::vector<int> sortIndices(const NumericVector &input);
 //'   (expected value).
 //' @param numRuns number of random subspace slices used to estimate the
 //'   deviation.
-//' @return List of subspaces for each reference dimension.
+//' @return List of deviation maximizing subspaces, one for each reference dimension.
 //' @export
 // [[Rcpp::export]]
 std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns);
