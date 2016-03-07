@@ -40,7 +40,6 @@ gammaNorm <- function(x){
 #'
 #' @return list containing the pairwise sum
 #' @export
-#'
 sumCombination <- function(x,y) unlist(x) + unlist(y)
 
 #' Max Combination Function

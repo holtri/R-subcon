@@ -12,6 +12,7 @@ License: tbd
 LazyData: TRUE
 Imports:
     Rcpp (>= 0.12.2),
-    data.table
+    data.table,
+    FNN
 LinkingTo: Rcpp
 RoxygenNote: 5.0.0

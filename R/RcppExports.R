@@ -127,6 +127,34 @@ HiCSMatrixC <- function(indexMap, alpha, numRuns) {
     .Call('subcon_HiCSMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
 }
 
+#' LOF reachability distance
+#'
+#' Calculates reachability distance for all objects
+#'
+#' @param knnIndex n x k Matrix of knn indices
+#' @param knnDistance n x k Matrix of knn distances
+#' @param k parameter for k-neighborhood
+#' @return vector of local reachability densities
+#'
+#' @export
+reachability <- function(knnIndex, knnDistance, k) {
+    .Call('subcon_reachability', PACKAGE = 'subcon', knnIndex, knnDistance, k)
+}
+
+#' Local outlier factor calculation
+#'
+#' Calculates LOF based on reachability densitiesfor all objects
+#'
+#' @param lrd vector of local reachability densities
+#' @param knnIndex n x k Matrix of knn indices
+#' @param k parameter for k-neighborhood
+#' @return vector of local outlier factors
+#'
+#' @export
+lofCalculation <- function(lrd, knnIndex, k) {
+    .Call('subcon_lofCalculation', PACKAGE = 'subcon', lrd, knnIndex, k)
+}
+
 #' Greedy Maximum Deviation  Heuristic
 #'
 #' Constructs one deviation maximizing subspace for each dimension. The search

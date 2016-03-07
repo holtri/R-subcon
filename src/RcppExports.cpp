@@ -114,6 +114,32 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// reachability
+NumericVector reachability(NumericMatrix knnIndex, NumericMatrix knnDistance, int k);
+RcppExport SEXP subcon_reachability(SEXP knnIndexSEXP, SEXP knnDistanceSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type knnIndex(knnIndexSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type knnDistance(knnDistanceSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    __result = Rcpp::wrap(reachability(knnIndex, knnDistance, k));
+    return __result;
+END_RCPP
+}
+// lofCalculation
+NumericVector lofCalculation(NumericVector lrd, NumericMatrix knnIndex, int k);
+RcppExport SEXP subcon_lofCalculation(SEXP lrdSEXP, SEXP knnIndexSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type lrd(lrdSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type knnIndex(knnIndexSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    __result = Rcpp::wrap(lofCalculation(lrd, knnIndex, k));
+    return __result;
+END_RCPP
+}
 // GMD
 std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns);
 RcppExport SEXP subcon_GMD(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
