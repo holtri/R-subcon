@@ -12,11 +12,11 @@ LOF(data, k)
 \item{k}{parameter for k-neighborhood}
 }
 \value{
-vector of local outlier factors
+Vector of local outlier factors
 }
 \description{
 Implements the LOF algorithm from the original publication, simplified by
-assuming unique distances
+assuming unique distances.
 }
 \references{
 Breunig, Markus M., Hans-Peter Kriegel, Raymond T. Ng, and Jörg
