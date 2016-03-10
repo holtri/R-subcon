@@ -1,5 +1,8 @@
 # R-subcon
-R package for subspace search
+
+This project makes subspace search based outlier detection easily accessible as an R package.
+
+So far the repository contains some of the latest subspace search approaches such as GMD, CDSS and HiCS and a fast implementation of the well known LOF algorithm for the evaluation of subspace search results. Also functionality around score combination, scaling and redundancy evaluation is implemented. Most of the key functions are written in c++ to significantly increase performance over plain R.
 
 This package is an early stage and under development. 
 
