@@ -114,6 +114,19 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// HiCSSearch
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns);
+RcppExport SEXP subcon_HiCSSearch(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type indexMap(indexMapSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
+    __result = Rcpp::wrap(HiCSSearch(indexMap, alpha, numRuns));
+    return __result;
+END_RCPP
+}
 // reachability
 NumericVector reachability(NumericMatrix knnIndex, NumericMatrix knnDistance, int k);
 RcppExport SEXP subcon_reachability(SEXP knnIndexSEXP, SEXP knnDistanceSEXP, SEXP kSEXP) {

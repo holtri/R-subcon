@@ -127,6 +127,10 @@ HiCSMatrixC <- function(indexMap, alpha, numRuns) {
     .Call('subcon_HiCSMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
 }
 
+HiCSSearch <- function(indexMap, alpha, numRuns) {
+    .Call('subcon_HiCSSearch', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+}
+
 #' LOF reachability distance
 #'
 #' Calculates reachability distance for all objects
