@@ -38,6 +38,7 @@ library(subcon)
 
 #generate sample data
 dt <- data.table(replicate(10,runif(100)))
+label <- c(rep(0, 90), rep(1, 10))
 
 #pre-process data into index map for efficient deviation calculation
 indexMatrix <- sortedIndexMatrix(dt)
@@ -56,10 +57,33 @@ HiCSMatrixC(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 
 ```R
 
-#Greedy maximum heuristic
+#HiCS Search
+outputSpaces <- HiCSSearch(indexMap = indexMatrix, alpha = 0.1, numRuns = 100, topkSearch = 500, topkOutput = 100)
 
-GMD(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
+#Greedy Maximum Deviation (GMD)
+outputSpaces <- GMD(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 
+#Cumulated Deviation Subspace Search (CDSS)
+dm <- deviationMatrixC(sortedIndexMatrix(dt), alpha = 0.1, numRuns = 100)
+outputSpaces <- CDSS(dm, tau=1)
+
+```
+
+#####Subspace search evaluation
+```R
+# Calculate LOF score for subspaces
+lofactors <- lapply(outputSpaces, function(x) {
+  LOF(dt[,unlist(x), with=F], k=10)
+})
+
+# Scaling of LOF scores
+scaledlofactors <- lapply(lofactors, gammaNorm)
+
+# AUC for combined scoring
+combinedScoreAUC(sumCombination, scores = lofactors, label = label)
+
+# Redundancy measure
+redundancyAUC(lofactors, label, sumCombination, scaleFun = identity)
 ```
 
 ##References
