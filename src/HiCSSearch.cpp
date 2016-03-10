@@ -25,8 +25,8 @@ bool containsProjection(std::set<std::vector<int> > subspaces, std::vector<int> 
 }
 
 std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > initialSpaces){
-  typedef  std::map<std::vector<int>, std::vector<int> > MyMapType;
-  MyMapType m;
+  typedef  std::map<std::vector<int>, std::vector<int> > PrefixMap;
+  PrefixMap m;
 
   std::set<std::vector<int> > subspaces;
   for (auto it = begin (initialSpaces); it != end (initialSpaces); ++it) {
@@ -38,7 +38,7 @@ std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > ini
     int suffix = sub[sub.size()-1];
 
     std::vector<int> value {suffix};
-    std::pair<MyMapType::iterator, bool> result = m.insert(std::make_pair(prefix,value));
+    std::pair<PrefixMap::iterator, bool> result = m.insert(std::make_pair(prefix,value));
     if(!result.second) {
       m[prefix].push_back(suffix);
     }
