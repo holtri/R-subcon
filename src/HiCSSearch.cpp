@@ -88,11 +88,7 @@ std::vector< std::vector<int> > twoDimProjections(int dimensionality){
   return twoDimProjections;
 }
 
-Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam,
-                               double alpha,
-                               int numRuns,
-                               int topkSearch,
-                               int topkOutput){
+Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam){
   Rcpp::List result;
 
   std::vector< std::vector<int> > tmp = subspaceVector(outputBeam);
@@ -105,15 +101,10 @@ Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspac
   std::vector<double> contrast = contrastVector(outputBeam);
   std::reverse(contrast.begin(), contrast.end());
   result["contrast"] = contrast;
-  result["alpha"] = alpha;
-  result["numRuns"] = numRuns;
-  result["topkSearch"] = topkSearch;
-  result["topkOutput"] = topkOutput;
 
   return result;
 }
 
-// [[Rcpp::export]]
 List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput){
 
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> searchBeam;
@@ -130,6 +121,6 @@ List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearc
     dim ++;
   }
 
-  return constructResultList(outputBeam, alpha, numRuns, topkSearch, topkOutput);
+  return constructResultList(outputBeam);
 }
 
