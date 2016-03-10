@@ -35,6 +35,15 @@ std::vector< std::vector<int> > subspaceVector(std::priority_queue<Subspace, std
   return subspaceVector;
 }
 
+std::vector<double> contrastVector(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> pq){
+  std::vector<double> contrastVector;
+  while (!pq.empty()){
+    contrastVector.push_back(pq.top().contrast);
+    pq.pop();
+  }
+  return contrastVector;
+}
+
 std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>
   pushFixedSize(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>& pq,
                 Subspace s,

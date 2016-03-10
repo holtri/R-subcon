@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <algorithm>
 #include "searchBeam.h"
 #include "deviationFunctions.h"
 
@@ -87,30 +88,48 @@ std::vector< std::vector<int> > twoDimProjections(int dimensionality){
   return twoDimProjections;
 }
 
-// [[Rcpp::export]]
-List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns){
+Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam,
+                               double alpha,
+                               int numRuns,
+                               int topkSearch,
+                               int topkOutput){
+  Rcpp::List result;
+
+  std::vector< std::vector<int> > tmp = subspaceVector(outputBeam);
   Rcpp::List outputSpaces;
-  int topkSearch = 500;
-  int topkOutput = 100;
+  for (auto it = tmp.rbegin(); it != tmp.rend(); ++it) {
+    outputSpaces.push_back(*it);
+  }
+
+  result["subspaces"] = outputSpaces;
+  std::vector<double> contrast = contrastVector(outputBeam);
+  std::reverse(contrast.begin(), contrast.end());
+  result["contrast"] = contrast;
+  result["alpha"] = alpha;
+  result["numRuns"] = numRuns;
+  result["topkSearch"] = topkSearch;
+  result["topkOutput"] = topkOutput;
+
+  return result;
+}
+
+// [[Rcpp::export]]
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput){
 
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> searchBeam;
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam;
   std::vector< std::vector<int> > candidates;
 
   candidates = twoDimProjections(indexMap.ncol());
-
+  int dim = 2;
   while(candidates.size()>0){
-    Rcpp::Rcout << "remaining candidates: " << candidates.size() << std::endl;
+    Rcpp::Rcout << "number of " << dim <<  "-dim candidates: " << candidates.size() << std::endl;
     searchBeam = std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>();
     updateSearchBeam(candidates, searchBeam, outputBeam, topkSearch, topkOutput, indexMap, alpha, numRuns);
     candidates = aprioriMerge(subspaceVector(searchBeam));
+    dim ++;
   }
 
-  std::vector< std::vector<int> > tmp = subspaceVector(outputBeam);
-  for (auto it = begin (tmp); it != end (tmp); ++it) {
-    outputSpaces.push_back(*it);
-  }
-
-  return outputSpaces;
+  return constructResultList(outputBeam, alpha, numRuns, topkSearch, topkOutput);
 }
 

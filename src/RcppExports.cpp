@@ -115,15 +115,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // HiCSSearch
-List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns);
-RcppExport SEXP subcon_HiCSSearch(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput);
+RcppExport SEXP subcon_HiCSSearch(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP, SEXP topkSearchSEXP, SEXP topkOutputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< NumericMatrix >::type indexMap(indexMapSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< int >::type numRuns(numRunsSEXP);
-    __result = Rcpp::wrap(HiCSSearch(indexMap, alpha, numRuns));
+    Rcpp::traits::input_parameter< int >::type topkSearch(topkSearchSEXP);
+    Rcpp::traits::input_parameter< int >::type topkOutput(topkOutputSEXP);
+    __result = Rcpp::wrap(HiCSSearch(indexMap, alpha, numRuns, topkSearch, topkOutput));
     return __result;
 END_RCPP
 }

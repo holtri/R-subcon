@@ -21,6 +21,8 @@ std::ostream& operator<<(std::ostream& os, const Subspace& subspace);
 
 std::vector< std::vector<int> > subspaceVector(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> pq);
 
+std::vector<double> contrastVector(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> pq);
+
 std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>
   pushFixedSize(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>& pq,
                 Subspace s,
