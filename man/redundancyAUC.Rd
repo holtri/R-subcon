@@ -4,16 +4,16 @@
 \alias{redundancyAUC}
 \title{Quantified redundancy}
 \usage{
-redundancyAUC(lofactors, label, combinationFun, scaleFun)
+redundancyAUC(scores, label, combinationFun, scaleFun)
 }
 \arguments{
-\item{lofactors}{list of LOF vectors for each subspace}
+\item{scores}{List of scoring vectors for each subspace.}
 
-\item{label}{class label}
+\item{label}{Class label.}
 
-\item{combinationFun}{Function to combine LOF scores to final scoring.}
+\item{combinationFun}{Function to combine scores to final scoring.}
 
-\item{scaleFun}{Function to scale LOF scores.}
+\item{scaleFun}{Function to scale scores.}
 }
 \value{
 List of \item{initialAUC}{AUC using the full set of subspaces.}
