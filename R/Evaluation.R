@@ -64,6 +64,7 @@ redundancyAUC <- function (scores, label, combinationFun, scaleFun) {
        "redundancy" = redundancy(initialAUC, improvedAUC),
        "numberInitialSpaces" = length(scores),
        "numberRemovedSpaces" = length(remove),
+       "numberRemainingSpaces" = length(scores) - length(remove),
        "removedSpaces" = sort(as.vector(remove)),
        "remainingSpaces" = sort(as.vector((1:length(scaledLOF))[-remove])))
 }
