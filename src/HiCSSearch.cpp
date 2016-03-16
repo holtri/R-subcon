@@ -12,6 +12,13 @@ void print(const std::vector<int> &vec){
   Rcpp::Rcout << std::endl;
 }
 
+std::string toString(const std::vector<int> &vec){
+  std::stringstream ss;
+  for (const auto& i: vec){
+    ss << i << " ";
+  }
+  return ss.str();
+}
 
 bool containsProjection(std::set<std::vector<int> > subspaces, std::vector<int> candidate){
   for(unsigned int i=0; i < candidate.size(); i++){
@@ -48,12 +55,13 @@ std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > ini
 
     std::vector<int> prefix = it->first;
     std::vector<int> sfx = m[prefix];
-
+    std::sort(sfx.begin(), sfx.end());
     for(auto i = sfx.begin(); i != sfx.end()-1; ++i){
       for(auto j = i+1; j != sfx.end(); ++j){
         std::vector<int> c = prefix;
         c.push_back(*i);
         c.push_back(*j);
+        // Rcpp::Rcout << "prefix: " << toString(prefix) << "suffix i:" << *i << " suffix j: " << *j <<std::endl;
         if(containsProjection(subspaces,c)){
           candidates.push_back(c);
         }
