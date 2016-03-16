@@ -19,6 +19,7 @@ redundancyAUC(scores, label, combinationFun, scaleFun)
 List of \item{initialAUC}{AUC using the full set of subspaces.}
   \item{improvedAUC}{AUC using the remaining set of subspaces.}
   \item{numberInitialSpaces}{Number of initial subspaces.}
+  \item{redundancy}{(maxAUC - initialAUC) / (maxAUC - 0.5).}
   \item{numberRemovedSpaces}{Number of remaining subspaces.}
   \item{removedSpaces}{Index of spaces removed from initial set.}
   \item{remainingSpaces}{Index of spaces remaining from initial set.}

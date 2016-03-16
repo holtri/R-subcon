@@ -84,10 +84,10 @@ lofactors <- lapply(outputSpaces, function(x) {
 scaledlofactors <- lapply(lofactors, gammaNorm)
 
 # AUC for combined scoring
-combinedScoreAUC(sumCombination, scores = lofactors, label = label)
+combinedScoreAUC(combinationFun = sumCombination, scores = lofactors, label = label)
 
 # Redundancy measure
-redundancyAUC(lofactors, label, sumCombination, scaleFun = identity)
+redundancyAUC(lofactors, label, combinationFun = sumCombination, scaleFun = identity)
 ```
 
 ##References

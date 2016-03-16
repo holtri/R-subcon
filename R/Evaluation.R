@@ -11,6 +11,10 @@ combinedScoreAUC <- function(combinationFun, scores, label){
   unlist(ROCR::performance(ROCR::prediction(Reduce(combinationFun, scores), label), "auc")@y.values)
 }
 
+redundancy <- function(auc, maxauc){
+  (maxauc - auc)/(maxauc-0.5)
+}
+
 #' Quantified redundancy
 #'
 #' Removes redundant subspaces from the set as long as the final scoring yields
@@ -24,6 +28,7 @@ combinedScoreAUC <- function(combinationFun, scores, label){
 #' @return List of \item{initialAUC}{AUC using the full set of subspaces.}
 #'   \item{improvedAUC}{AUC using the remaining set of subspaces.}
 #'   \item{numberInitialSpaces}{Number of initial subspaces.}
+#'   \item{redundancy}{(maxAUC - initialAUC) / (maxAUC - 0.5).}
 #'   \item{numberRemovedSpaces}{Number of remaining subspaces.}
 #'   \item{removedSpaces}{Index of spaces removed from initial set.}
 #'   \item{remainingSpaces}{Index of spaces remaining from initial set.}
@@ -56,6 +61,7 @@ redundancyAUC <- function (scores, label, combinationFun, scaleFun) {
 
   list("initialAUC" = initialAUC,
        "maximumAUC" = improvedAUC,
+       "redundancy" = redundancy(initialAUC, improvedAUC),
        "numberInitialSpaces" = length(scores),
        "numberRemovedSpaces" = length(remove),
        "removedSpaces" = sort(as.vector(remove)),
