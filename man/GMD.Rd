@@ -30,7 +30,8 @@ added to that subspace is the dimension that has the second highest
 deviation. If the deviation for r increases by adding a dimension, the
 subspace will be updated, else that dimension is discarded.
 }
-\examples{
+\details{
+Examples
 
 reference dimension: 1
 2-dim projections (ordered by deviation):
@@ -54,7 +55,5 @@ add dimension 4
 [1,2,3,4] deviation(1|2,3,4) = 0.67 -> increases the deviation for the reference dimension
 
 Output space for reference dimension 1: [1,2,3,4]
-
-
 }
 

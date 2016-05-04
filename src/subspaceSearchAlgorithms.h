@@ -16,7 +16,7 @@ std::vector<int> sortIndices(const NumericVector &input);
 //' deviation. If the deviation for r increases by adding a dimension, the
 //' subspace will be updated, else that dimension is discarded.
 //'
-//' @examples
+//' Examples
 //'
 //' reference dimension: 1
 //' 2-dim projections (ordered by deviation):
