@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/holtri/R-subcon.svg?branch=master)](https://travis-ci.org/holtri/R-subcon)
+
 # R-subcon
 
 This project makes subspace search based outlier detection easily accessible as an R package.
