@@ -4,14 +4,14 @@
 \alias{reachability}
 \title{LOF reachability distance}
 \usage{
-reachability(knnIndex, knnDistance, k)
+reachability(knnIndex, knnDistance, maxkIdx)
 }
 \arguments{
 \item{knnIndex}{n x k Matrix of knn indices}
 
 \item{knnDistance}{n x k Matrix of knn distances}
 
-\item{k}{parameter for k-neighborhood}
+\item{vector}{indices for the k-neighborhood}
 }
 \value{
 vector of local reachability densities

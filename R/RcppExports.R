@@ -163,12 +163,12 @@ HiCSSearch <- function(indexMap, alpha, numRuns, topkSearch, topkOutput) {
 #'
 #' @param knnIndex n x k Matrix of knn indices
 #' @param knnDistance n x k Matrix of knn distances
-#' @param k parameter for k-neighborhood
+#' @param vector indices for the k-neighborhood
 #' @return vector of local reachability densities
 #'
 #' @export
-reachability <- function(knnIndex, knnDistance, k) {
-    .Call('subcon_reachability', PACKAGE = 'subcon', knnIndex, knnDistance, k)
+reachability <- function(knnIndex, knnDistance, maxkIdx) {
+    .Call('subcon_reachability', PACKAGE = 'subcon', knnIndex, knnDistance, maxkIdx)
 }
 
 #' Local outlier factor calculation
@@ -177,12 +177,12 @@ reachability <- function(knnIndex, knnDistance, k) {
 #'
 #' @param lrd vector of local reachability densities
 #' @param knnIndex n x k Matrix of knn indices
-#' @param k parameter for k-neighborhood
+#' @param vector indices for the k-neighborhood
 #' @return vector of local outlier factors
 #'
 #' @export
-lofCalculation <- function(lrd, knnIndex, k) {
-    .Call('subcon_lofCalculation', PACKAGE = 'subcon', lrd, knnIndex, k)
+lofCalculation <- function(lrd, knnIndex, maxkIdx) {
+    .Call('subcon_lofCalculation', PACKAGE = 'subcon', lrd, knnIndex, maxkIdx)
 }
 
 #' Greedy Maximum Deviation  Heuristic

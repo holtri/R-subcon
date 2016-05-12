@@ -9,12 +9,12 @@ using namespace Rcpp;
 //'
 //' @param knnIndex n x k Matrix of knn indices
 //' @param knnDistance n x k Matrix of knn distances
-//' @param k parameter for k-neighborhood
+//' @param vector indices for the k-neighborhood
 //' @return vector of local reachability densities
 //'
 //' @export
 // [[Rcpp::export]]
-NumericVector reachability(NumericMatrix knnIndex, NumericMatrix knnDistance, int k);
+NumericVector reachability(NumericMatrix knnIndex, NumericMatrix knnDistance, NumericVector maxkIdx);
 
 //' Local outlier factor calculation
 //'
@@ -22,11 +22,11 @@ NumericVector reachability(NumericMatrix knnIndex, NumericMatrix knnDistance, in
 //'
 //' @param lrd vector of local reachability densities
 //' @param knnIndex n x k Matrix of knn indices
-//' @param k parameter for k-neighborhood
+//' @param vector indices for the k-neighborhood
 //' @return vector of local outlier factors
 //'
 //' @export
 // [[Rcpp::export]]
-NumericVector lofCalculation(NumericVector lrd, NumericMatrix knnIndex, int k);
+NumericVector lofCalculation(NumericVector lrd, NumericMatrix knnIndex, NumericVector maxkIdx);
 
 #endif

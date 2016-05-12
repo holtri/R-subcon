@@ -4,14 +4,14 @@
 \alias{lofCalculation}
 \title{Local outlier factor calculation}
 \usage{
-lofCalculation(lrd, knnIndex, k)
+lofCalculation(lrd, knnIndex, maxkIdx)
 }
 \arguments{
 \item{lrd}{vector of local reachability densities}
 
 \item{knnIndex}{n x k Matrix of knn indices}
 
-\item{k}{parameter for k-neighborhood}
+\item{vector}{indices for the k-neighborhood}
 }
 \value{
 vector of local outlier factors

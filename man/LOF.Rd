@@ -4,12 +4,20 @@
 \alias{LOF}
 \title{Local Outlier Factor}
 \usage{
-LOF(data, k)
+LOF(data, k, mode = "simple", maxK = NULL)
 }
 \arguments{
 \item{data}{n x m matrix with n objects and m dimensions}
 
 \item{k}{parameter for k-neighborhood}
+
+\item{mode}{"exact" mode uses individual k-distance and k-neighborhood for
+each object assuming non-unique distances. For exact mode, maxK needs to be
+specified. "simple" mode assuming unique distances.}
+
+\item{maxK}{limits up to which k-neighborhood objects are considered if they
+have similar distances. A full search can be achieved by setting maxK to
+(nrow(data) - 1). Setting maxK too high can lead to poor runtime performance.}
 }
 \value{
 Vector of local outlier factors
