@@ -1,5 +1,7 @@
 # R-subcon
 
+[![Build Status](https://travis-ci.org/holtri/R-subcon.svg?branch=master)](https://travis-ci.org/holtri/R-subcon) [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+
 This project makes subspace search based outlier detection easily accessible as an R package.
 
 So far the repository contains some of the latest subspace search approaches such as GMD, CDSS and HiCS and a fast implementation of the well known LOF algorithm for the evaluation of subspace search results. Also functionality around score combination, scaling and redundancy evaluation is implemented. Most of the key functions are written in c++ to significantly increase performance over plain R.
