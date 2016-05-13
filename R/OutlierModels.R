@@ -20,7 +20,7 @@
 #'
 #' @export
 LOF <- function (data, k, mode = "simple", maxK=NULL) {
-
+  kDist <- c()
   switch(mode,
          simple = {
            distances <- FNN::get.knn(as.matrix(data), k)
