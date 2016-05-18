@@ -27,8 +27,8 @@ Implements the LOF algorithm from the original publication, simplified by
 assuming unique distances.
 }
 \references{
-Breunig, Markus M., Hans-Peter Kriegel, Raymond T. Ng, and Jörg
+Breunig, Markus M., Hans-Peter Kriegel, Raymond T. Ng, and Joerg
   Sander. 2000. LOF: Identifying Density-Based Local Outliers. SIGMOD Rec. 29
-  (2). New York, NY, USA: ACM: 93–104.
+  (2). New York, NY, USA: ACM: p. 93 to 104.
 }
 

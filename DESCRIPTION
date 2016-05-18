@@ -14,7 +14,8 @@ Imports:
     Rcpp (>= 0.12.2),
     data.table,
     FNN,
-    ROCR
+    ROCR,
+    assertthat
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
