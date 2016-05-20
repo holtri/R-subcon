@@ -105,7 +105,7 @@ precisionAtN <- function(trueLabel, scores, n, adjusted = FALSE){
   assert_that(n <= length(trueLabel))
 
   idx <- sort.int(scores, index.return = T, decreasing = T)
-  prec <- sum(label[idx$ix][1:n])/n
+  prec <- sum(trueLabel[idx$ix][1:n])/n
   if(adjusted){
     numOutliers <- sum(trueLabel)
     N <- length(trueLabel)
@@ -138,7 +138,7 @@ precisionAtN <- function(trueLabel, scores, n, adjusted = FALSE){
 averagePrecision <- function(trueLabel, scores, adjusted = FALSE){
   precSum <- 0
   for(k in seq_along(trueLabel)[trueLabel==1]){
-    precSum <- precSum + precisionAtN(trueLabel, scores, k)
+    precSum <- precSum + precisionAtN(trueLabel, scores, k, adjusted)
   }
   precSum / sum(trueLabel)
 }
