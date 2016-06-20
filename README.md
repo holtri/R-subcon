@@ -92,6 +92,51 @@ combinedScoreAUC(combinationFun = sumCombination, scores = lofactors, label = la
 redundancyAUC(lofactors, label, combinationFun = sumCombination, scaleFun = identity)
 ```
 
+#####Using the package in Python
+rpy2 is an interface to R running embedded in a Python process. (http://rpy2.bitbucket.org/)
+Basically what we do is creating R objects in Python, which we can manipulate both inside the R objects with R syntax, or outside with Python syntax.
+The main example as a Python script shows below.
+```Python
+# Importing Python packages
+import numpy as np
+import scipy as sp
+import pandas as pd
+from rpy2.robjects.packages import importr
+import rpy2.robjects as ro
+
+# Importing R packages
+importr('data.table')
+importr('subcon')
+
+# Creating R variables
+ro.r("""dt <- data.table(replicate(10,runif(100)))
+label <- c(rep(0, 90), rep(1, 10))
+indexMatrix <- sortedIndexMatrix(dt)""")
+
+# Working with R inside the objects
+ro.r('averageDeviationC(indexMap = indexMatrix, subspace = c(1,2), alpha = 0.1, referenceDim = 1, numRuns = 100)')
+ro.r('HiCSContrastC(indexMap = indexMatrix, subspace = c(1,2), alpha = 0.1, numRuns = 100)')
+```
+
+Note that the variables defined inside ro.r() exist as Python variables:
+```
+>>>type(label)
+rpy2.robjects.vectors.FloatVector
+```
+Also you can easily convert them to native Python variables:
+```
+>>>plabel=np.array(label)
+>>>type(plabel)
+numpy.ndarray
+```
+or
+```
+>>>pydf = com.load_data('dt')
+>>>type(pydf)
+pandas.core.frame.DataFrame
+```
+
+
 ##References
 
 The package contains functions to search for subspaces in high dimensional data bases. The contrast defintion used in the code is based on [HiCS - High Contrast Subspaces for Density Based Outlier Ranking][1].
