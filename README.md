@@ -122,18 +122,18 @@ ro.r('HiCSContrastC(indexMap = indexMatrix, subspace = c(1,2), alpha = 0.1, numR
 ```
 
 Note that the variables defined inside ro.r() exist as Python variables:
-```
+```Python
 >>>type(label)
 rpy2.robjects.vectors.FloatVector
 ```
 Also you can easily convert them to native Python variables:
-```
+```Python
 >>>plabel=np.array(label)
 >>>type(plabel)
 numpy.ndarray
 ```
 or
-```
+```Python
 >>>pydf = com.load_data('dt')
 >>>type(pydf)
 pandas.core.frame.DataFrame
