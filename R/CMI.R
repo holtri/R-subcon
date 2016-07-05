@@ -4,6 +4,8 @@ library(foreign)
 
 dataset_labeled <- as.data.table(read.arff("synth_multidim_010_000.arff"))
 
+#print(names(dataset_labeled))
+
 if("id" %in% names(dataset_labeled)){
   dataset_labeled <- dataset_labeled[,!"id", with=F]
 }
@@ -21,20 +23,38 @@ if("yes" %in% levels(dataset_labeled$class)){
 }
 
 hCE <- function(data){
+  print('------------hceBegin:')
+  #print(data)
   x <- sort(data)
   tmpSum <- 0
   for(i in (1:(length(x)-1))){
     tmpSum <- tmpSum + ((x[i+1] - x[i]) * (i/length(x)) * log(i/length(x)))
   }
   - tmpSum
+  print('tmpSum:'); print(-tmpSum)
 }
 
 conditionalhCE <- function(data, referenceDim, conditionalDim, numClusters = 1){
   ce <- 0
   clusters <- kmeans(data[, conditionalDim, with=F], numClusters)
+  print('referenceDim:')
+  print(referenceDim)
+  print('------------')
+  print('conditionalDim:')
+  print(conditionalDim)
+  print('------------')
+
   for(c in 1:numClusters){
+    # hCE(data) Aufruf fuer alle Cluster: nimmt pro Cl. die Dim.(aus IMportparameter) und Cluster
+    # Bed.: doppelte [-Klammer in R?
+    #print(clusters)
+    print('Clustersize:'); print(clusters$size[c])
     ce <- ce + clusters$size[c]/nrow(data) * hCE(data[[referenceDim]][clusters$cluster==c])
   }
+  # print(nrow(data)) => 1000
+  print('ce:')
+  print(ce)
+  print('------------Ende condHCE')
   ce
 }
 
@@ -67,7 +87,7 @@ CMI <- function(dt, subspace){
                                                        referenceDim = subspace[i],
                                                        conditionalDim = initialSubspace$sub,
                                                        numClusters = 10)
-      print(tmp)
+      #print(tmp)
       if(tmp > nextSubspace$contrast){
         nextSubspace = list(sub = c(subspace[i], initialSubspace$sub), contrast = tmp)
       }
@@ -87,5 +107,17 @@ dt <- dataset_labeled
 
 CMI(dt, subspace)
 
+# Ausgabe der Clustergroeße (ein Bsp):
+#85
+#87
+#115
+#112
+#86
+#131
+#110
+#144
+#82
+#48
 
-
+# Anzahl Datenpunkte (Summe Clusterpkt) = 1000
+# print(nrow(data)) => 1000
