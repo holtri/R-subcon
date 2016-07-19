@@ -1,38 +1,100 @@
 #include "CMI.h"
 #include <Rcpp.h>
 #include <algorithm>    // std::sort
-
+#include <vector>
 using namespace Rcpp;
 
 
 
 double calcHce(std::vector<double> space) {
-  double hce = 0;
+  double hce = 0.0000;
 
-// Sortierung
+// Sort
   std::sort (space.begin(), space.end());
 
-//Hce-Berechnung
-  for(unsigned int i=0; i<space.size(); i++){
-    hce <- hce + ((space[i+1] - space[i]) * ((i+1)/space.size()) * log((i+1)/space.size()));
+// Print after sort
+  std::vector<double>::const_iterator i;
+  std::cout<<"Vektor nach Sortierung:"<<std::endl;
+  for(i=space.begin(); i!=space.end(); ++i){
+    std::cout<<(*i)<<std::endl;
   }
-    return -hce;
+
+
+
+//Hce-Calculation
+  for(unsigned int i=0; i<space.size()-1; ++i){
+   // hce = hce + ((space[i+1] - space[i]) * ((i+1)/space.size()) * log((i+1)/space.size()));
+  //  std::cout<<hce<<std::endl;
+
+
+    double zv = double(i+1.0)/double(space.size());
+    std::cout<<"zv:"<<zv<<std::endl;
+    double logar = zv * log(zv);
+    std::cout<<"logar:"<<logar<<std::endl;
+
+
+    hce = hce + ((space[i+1] - space[i]) * logar);
+
+  //  std::cout<<"(i+1):"<<(i+1)<<", space.size():"<<space.size()<<std::endl;
+    std::cout<<"hce:"<<hce<<std::endl;
+    std::cout<<"i:"<<i<<std::endl;
+  //  std::cout<<"space[i]:"<<space[i]<<std::endl;
+  }
+
+      return -hce;
 }
 
-//
-// double calcCHce(std::vector<double> space, int refDim, int conDim, int numClust){
-//   double chce = 0;
-// // Clustering des "space": todo
-//
-// // Pro Cluster hce berechnen
-//   for (unsigned int i=0; i<numClust; i++){
-//     chce = chce + cluster.size()/space.size() * calcHce(); // todo: vervollstaendigen
-//   }
-//
-//
-//   return chce;
-// }
+// [[Rcpp::export]]
+double testHce(){
+    std::vector<double> s;
+  //  s.push_back(999);
+    s.push_back(1.0);
+    s.push_back(2.0);
+    s.push_back(9.0);
+    s.push_back(5.0);
+    s.push_back(455.0);
 
+
+    double Hces = calcHce(s);
+    return Hces;
+}
+
+// calc cHce
+ double calcCHce(std::vector<double> space, int refDim, int conDim, unsigned int numClust){
+  
+   double chce = 0;
+   // Clustering of "space": todo
+  
+  /*** R
+    clusters <- kmeans(space[, conDim, with=F], numClust)
+  */
+  
+
+// Pro Cluster hce berechnen
+   for (unsigned int i=0; i<numClust; i++){
+//     chce = chce + cluster.size()/space.size() * calcHce(); // todo: vervollstaendigen
+   }
+//
+//
+   return chce;
+ }
+
+
+// [[Rcpp::export]]
+double testcHce(){
+  
+  std::vector<double> s;
+  
+
+  s.push_back(1.0);
+  s.push_back(2.0);
+  s.push_back(5.0);
+  s.push_back(9.0);
+  s.push_back(455.0);
+  s.push_back(999);
+  double cHce = calcCHce(s,3,4,2);
+  return cHce;
+}  
 /*
  conditionalhCE <- function(data, referenceDim, conditionalDim, numClusters = 1){
  ce <- 0

@@ -18,9 +18,9 @@
   double calcHce(std::vector<double> space);
 
 
-//
-//   // calculate cond. hce
-//   double calcCHce(std::vector<double> space, int refDim, int conDim, int numClust);
+
+// calculate cond. hce
+   double calcCHce(std::vector<double> space, int refDim, int conDim, unsigned int numClust);
 //   //data, referenceDim, conditionalDim, numClusters = 1)
 //
 //   // calculate cmi
