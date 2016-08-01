@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// calcHce
+double calcHce(std::vector<double> space);
+RcppExport SEXP subcon_calcHce(SEXP spaceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector<double> >::type space(spaceSEXP);
+    __result = Rcpp::wrap(calcHce(space));
+    return __result;
+END_RCPP
+}
 // KSTestC
 double KSTestC(LogicalVector indexSelection, NumericVector indexMapReferenceAttribute);
 RcppExport SEXP subcon_KSTestC(SEXP indexSelectionSEXP, SEXP indexMapReferenceAttributeSEXP) {

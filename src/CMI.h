@@ -1,6 +1,7 @@
 #ifndef CMI_H
 #define CMI_H
 
+#include <Rcpp.h>
 #include <queue>
 #include <vector>       // std::vector
 
@@ -20,10 +21,12 @@
 
 
 // calculate cond. hce
-   double calcCHce(std::vector<double> space, int refDim, int conDim, unsigned int numClust);
+// todo: data is Rcpp::NumericMatrix
+   double calcCHce(std::vector<double> data, int refDim, int conDim, unsigned int numClust);
 //   //data, referenceDim, conditionalDim, numClusters = 1)
-//
+
+
 //   // calculate cmi
-//   double cmi(std::vector<double> subspace);
+   double cmi(Rcpp::NumericVector subspace, Rcpp::NumericMatrix data);
 
 #endif

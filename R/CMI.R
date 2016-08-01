@@ -23,7 +23,7 @@ if("yes" %in% levels(dataset_labeled$class)){
 }
 
 hCE <- function(data){
-  print('------------hceBegin:')
+  #print('------------hceBegin:')
   #print(data)
   x <- sort(data)
   tmpSum <- 0
@@ -31,30 +31,32 @@ hCE <- function(data){
     tmpSum <- tmpSum + ((x[i+1] - x[i]) * (i/length(x)) * log(i/length(x)))
   }
   - tmpSum
-  print('tmpSum:'); print(-tmpSum)
+  #print('tmpSum:'); print(-tmpSum)
 }
 
 conditionalhCE <- function(data, referenceDim, conditionalDim, numClusters = 1){
   ce <- 0
-  clusters <- kmeans(data[, conditionalDim, with=F], numClusters)
-  print('referenceDim:')
+  clusters <- kmeans(as.matrix(data[, conditionalDim, with=F]), numClusters)
+# data[,condDim]: Zeile=egal, Spalte=condDim, was macht " with=F"?
+  print('------------Beg condHCE')
+   print('referenceDim:')
   print(referenceDim)
-  print('------------')
+
   print('conditionalDim:')
   print(conditionalDim)
-  print('------------')
+
 
   for(c in 1:numClusters){
-    # hCE(data) Aufruf fuer alle Cluster: nimmt pro Cl. die Dim.(aus IMportparameter) und Cluster
+    # hCE(data) Aufruf fuer alle Cluster: nimmt pro Cl. die RefDim.(aus IMportparameter) und Cluster
     # Bed.: doppelte [-Klammer in R?
     #print(clusters)
-    print('Clustersize:'); print(clusters$size[c])
+    #print('Clustersize:'); print(clusters$size[c])
     ce <- ce + clusters$size[c]/nrow(data) * hCE(data[[referenceDim]][clusters$cluster==c])
   }
   # print(nrow(data)) => 1000
   print('ce:')
   print(ce)
-  print('------------Ende condHCE')
+
   ce
 }
 
@@ -69,20 +71,36 @@ CMI <- function(dt, subspace){
     for(j in 1:length(subspace)){
       if(i!=j){
         tmp <- hCE(dt[[ subspace[i] ]]) - conditionalhCE(dt, referenceDim = subspace[i], conditionalDim = subspace[j], numClusters = 10)
-        # print(list(sub = c(subspace[i], subspace[j]), contrast = tmp))
+        #
+
+        print('contrast:')
+        print(tmp)
         if(tmp > initialSubspace$contrast){
           initialSubspace = list(sub = c(subspace[i], subspace[j]), contrast = tmp)
+          print(list(sub = c(subspace[i], subspace[j]), contrast = tmp))
         }
       }
     }
   }
 
   totalContrast <- totalContrast + initialSubspace$contrast
-  subspace <- subspace[-which(subspace %in% initialSubspace$sub)]
+  print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+  print('subspace:')
+  print(subspace)
+  #[1] "subspace:"
+  #[1] 3 4 5 6
+  subspace <- subspace[-which(subspace %in% initialSubspace$sub)] # what happens here?
+  print('subspace:')
+  print(subspace)
+  #[1] "subspace:"
+  #[1] 3 5
 
   nextSubspace <- list(sub = c(), contrast = 0) # we only take the best dimension level wise
   while(length(subspace) > 0){ # while still dimensions left
     for(i in 1:length(subspace)){
+
+      print('initialSubspace$sub:')
+      print(initialSubspace$sub)
       tmp <- hCE(dt[[ subspace[i] ]]) - conditionalhCE(dt,
                                                        referenceDim = subspace[i],
                                                        conditionalDim = initialSubspace$sub,
