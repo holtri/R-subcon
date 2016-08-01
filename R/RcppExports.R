@@ -5,6 +5,10 @@ calcHce <- function(space) {
     .Call('subcon_calcHce', PACKAGE = 'subcon', space)
 }
 
+cmi <- function(subspace, data) {
+    .Call('subcon_cmi', PACKAGE = 'subcon', subspace, data)
+}
+
 #' Kolmogorov-Smirnov test
 #'
 #' Compares marginal and conditional probability density function for a given

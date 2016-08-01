@@ -105,18 +105,25 @@ double conditionalHce(NumericMatrix x, ...){
 //--------------------------------------------------------------------------------------
 // CMI
 //--------------------------------------------------------------------------------------
+struct Projection
+{
+  unsigned int refDim;
+  std::list<unsigned int> condDim;
+};
+
+// [[Rcpp::export]]
  double cmi(Rcpp::NumericVector subspace, Rcpp::NumericMatrix data){
-    double cmiContrast = 0.0;
+   double cmiContrast = 0.0;
    double tmpContrast = 0.0;
 
- std::cout<<"subspace.size:"<<subspace.size()<<std::endl;
+   std::cout<<"subspace.size:"<<subspace.size()<<std::endl;
 
    //start with 2-dim projections
    for (unsigned int i=0; i<subspace.size(); i++){
      for(unsigned int j=0; j<subspace.size(); j++){
        if(i!=j){
-           // todo: Kontrast berechnen: tmpContrast = 1.) hce(Xi) - chce(Xi | Xj) oder 2.) hce(Xj) - chce(Xj | Xi) ???
-
+           // todo: Kontrast berechnen: tmpContrast =    1.) hce(Xi) - chce(Xi | Xj) oder 2.) hce(Xj) - chce(Xj | Xi) ???
+            // 1: Implement. in CMI.R und 2: Formel aus Paper (?)
            // hCE(dt[[ subspace[i] ]]) in R: liefert einen Vektor einer Spalte (der subspace[i].-Spalte) des dt, d.h. hCE wird nur fuer diese Spalte berechnet, richtig?
            //j.th column of data is copied to a numeric vector
            NumericVector attr = data( _, j);
@@ -124,6 +131,17 @@ double conditionalHce(NumericMatrix x, ...){
            std::vector<double> dat = Rcpp::as<std::vector<double> >(attr);
 
            tmpContrast = calcHce(dat); //Content from all: data[*][j]
+
+           //store contrast
+
+           std::map<double, Projection> contrastMap;
+           Projection p2dim;
+           p2dim.refDim = subspace[j];
+
+           std::list<unsigned int> cd;
+           cd.push_back(subspace[i]);
+           p2dim.condDim = cd;
+           contrastMap.insert(std::make_pair(tmpContrast, p2dim));
        }
      }
   }
@@ -135,36 +153,4 @@ double conditionalHce(NumericMatrix x, ...){
    return cmiContrast;
  }
 
-/*
-# find starting 2-dim projection
-initialSubspace <- list(sub = c(), contrast = 0)
-  for(i in 1:length(subspace)){ # interate over indices of subspace dimensions
-    for(j in 1:length(subspace)){
-      if(i!=j){
-        tmp <- hCE(dt[[ subspace[i] ]]) - conditionalhCE(dt, referenceDim = subspace[i], conditionalDim = subspace[j], numClusters = 10)
-# print(list(sub = c(subspace[i], subspace[j]), contrast = tmp))
-        if(tmp > initialSubspace$contrast){
-          initialSubspace = list(sub = c(subspace[i], subspace[j]), contrast = tmp)
-        }
-      }
-    }
-  }
- */
-
-
- // [[Rcpp::export]]
- double testcMI(){
-
-std::vector<double> s;
-
-
-s.push_back(1.0);
-s.push_back(2.0);
-s.push_back(5.0);
-s.push_back(9.0);
-s.push_back(455.0);
-s.push_back(999);
-double cHce = calcCHce(s,3,4,2);
-return cHce;
- }
 

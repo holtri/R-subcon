@@ -16,6 +16,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// cmi
+double cmi(Rcpp::NumericVector subspace, Rcpp::NumericMatrix data);
+RcppExport SEXP subcon_cmi(SEXP subspaceSEXP, SEXP dataSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type subspace(subspaceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type data(dataSEXP);
+    __result = Rcpp::wrap(cmi(subspace, data));
+    return __result;
+END_RCPP
+}
 // KSTestC
 double KSTestC(LogicalVector indexSelection, NumericVector indexMapReferenceAttribute);
 RcppExport SEXP subcon_KSTestC(SEXP indexSelectionSEXP, SEXP indexMapReferenceAttributeSEXP) {
