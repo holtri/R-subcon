@@ -122,7 +122,7 @@ double conditionalHce(NumericMatrix x, ...){
 struct Projection
 {
   unsigned int refDim;
-  std::list<unsigned int> condDim;
+  std::vector<unsigned int> condDim;
   double contrast;
 };
 
@@ -161,7 +161,7 @@ struct Projection
              //store contrast
              
              p2dim.refDim = subspace[i];
-             std::list<unsigned int> cd;
+             std::vector<unsigned int> cd;
              cd.push_back(subspace[j]);
              p2dim.condDim = cd;
              p2dim.contrast = tmpContrast;
@@ -176,22 +176,30 @@ struct Projection
    // todo: subspace kürzen: Komplement bilden: Subspace ohne die Dim. mit höchstem Kontrast
    // in R: subspace <- ... -which(subspace %in% initialSubspace$sub)
   
-  /*for (i=subspace.begin();i<subspace.end();i++)
+  std::vector<double> subspaceVec = Rcpp::as<std::vector<double> >(subspace);
+  for (std::vector<double>::iterator it=subspaceVec.begin();it<subspaceVec.end();it++)
   {
-    if ( subspace[i] == p2dim.refDim or subspace[i] in p2dim.condDim)
-    {
-      subspace.erase(i);
+    if ( *it == p2dim.refDim) {
+      subspaceVec.erase(it);
+    } 
+     else {
+      for (unsigned int i=0; i<2; i++) 
+      if ( *it == p2dim.condDim[i]) {
+        subspaceVec.erase(it);
+      }  
     }
-  }*/
+  }
    
-   while(subspace.size() > 0){        // while still dimensions left
-     for(unsigned int i=0; i<subspace.size(); i++) {
+   while(subspaceVec.size() > 0){        // while still dimensions left
+     for(unsigned int i=0; i<subspaceVec.size(); i++) {
        
        /*tmp = hCE(dt[[ subspace[i] ]]) - conditionalhCE( dt,
                                                         referenceDim = subspace[i],
                                                         conditionalDim = initialSubspace$sub,
                                                        numClusters = 10)
         */ 
+       // todo: vervollstaendigen:
+       //tmp = calcHce(data[subspace[i]]);
 
        if(tmp > pNextdim.contrast){
           pNextdim.refDim = subspace[i];
