@@ -3,19 +3,9 @@
 #include <algorithm>    // std::sort
 #include <vector>
 #include <Rcpp.h>
-//#include "RcppMLPACK.h"
 using namespace Rcpp;
-//using namespace mlpack::kmeans;
 
-/*** R
-# This is R code
-#List mlkmeans(const arma::mat& data, const int& clusters)
-#age <- c(17, 30, 30, 25, 23, 21)
-#data<-matrix(age, nrow=3, ncol=2, byrow=FALSE)
-# list<-mlpack::kmeans::mlkmeans(data, 3)
-#print('Test')
-# print(result)
-*/
+
 
 
 //--------------------------------------------------------------------------------------
@@ -167,7 +157,8 @@ struct Projection
   std::vector<double> subspaceVec = Rcpp::as<std::vector<double> >(subspace);
   for (std::vector<double>::iterator it=subspaceVec.begin();it<subspaceVec.end();it++)
   {
-    if ( *it == p2dim.refDim) {
+    // todo: vector statt struct (konvention: letztes Element = refDim)
+    if ( *it == p2dim.refDim or *it == p2dim.condDim[0]) {
       subspaceVec.erase(it);
     } 
      else {
