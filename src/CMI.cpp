@@ -41,16 +41,8 @@ double calcHce(std::vector<double> space) {
   for(unsigned int i=0; i<space.size()-1; ++i){
 
     double zv = double(i+1.0)/double(space.size());
-    std::cout<<"zv:"<<zv<<std::endl;
     double logar = zv * log(zv);
-    std::cout<<"logar:"<<logar<<std::endl;
-
-
     hce = hce + ((space[i+1] - space[i]) * logar);
-
-    std::cout<<"hce:"<<hce<<std::endl;
-    std::cout<<"i:"<<i<<std::endl;
-
   }
 
       return -hce;
@@ -143,23 +135,19 @@ struct Projection
    for (unsigned int i=0; i<subspace.size(); i++){
      for(unsigned int j=0; j<subspace.size(); j++){
        if(i!=j){
-           // todo: Kontrast berechnen: tmpContrast =    1.) hce(Xi) - chce(Xi | Xj) oder 2.) hce(Xj) - chce(Xj | Xi) ???
-            // 1: Implement. in CMI.R und 2: Formel aus Paper (?)
-           // hCE(dt[[ subspace[i] ]]) in R: liefert einen Vektor einer Spalte (der subspace[i].-Spalte) des dt, 
-           //     d.h. hCE wird nur fuer diese Spalte berechnet, richtig?
-           //j.th column of data is copied to a numeric vector
-           NumericVector attr = data( _, j);
+           
+           //i.th column of data is copied to a numeric vector
+           NumericVector attr = data( _, i);
            //conversion to std::vector
            std::vector<double> dat = Rcpp::as<std::vector<double> >(attr);
 
            // todo: when chce is complete: add it to calcul.:
-           tmpContrast = calcHce(dat); //Content from all: data[*][j]
+           tmpContrast = calcHce(dat); //Content from all: data[*][i]
 
           
            
            if(tmpContrast > p2dim.contrast){
              //store contrast
-             
              p2dim.refDim = subspace[i];
              std::vector<unsigned int> cd;
              cd.push_back(subspace[j]);
@@ -202,17 +190,18 @@ struct Projection
        //tmp = calcHce(data[subspace[i]]);
 
        if(tmp > pNextdim.contrast){
-          pNextdim.refDim = subspace[i];
-          std::list<unsigned int> cdn;
-          //cdn.push_back(p2dim.condDim);
+          pNextdim.refDim = subspaceVec[i];
           
-          pNextdim.condDim = p2dim.condDim;
-         // = list(sub = c(subspace[i], initialSubspace$sub), 
+          // add refDim and condDim from old vector to the new one
+          pNextdim.condDim.push_back(p2dim.refDim);
+          pNextdim.condDim.insert(pNextdim.condDim.end(), p2dim.condDim.begin(), p2dim.condDim.end());
+         
           pNextdim.contrast = tmp;
        }
      }
        cmiContrast += pNextdim.contrast;
        p2dim = pNextdim;
+       // todo: pNextdim initialisieren und subspaceVec kuerzen
        
        /*
        totalContrast <- totalContrast + nextSubspace$contrast
