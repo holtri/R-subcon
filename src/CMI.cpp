@@ -2,7 +2,21 @@
 #include <Rcpp.h>
 #include <algorithm>    // std::sort
 #include <vector>
+#include <Rcpp.h>
+//#include "RcppMLPACK.h"
 using namespace Rcpp;
+//using namespace mlpack::kmeans;
+
+/*** R
+# This is R code
+#List mlkmeans(const arma::mat& data, const int& clusters)
+#age <- c(17, 30, 30, 25, 23, 21)
+#data<-matrix(age, nrow=3, ncol=2, byrow=FALSE)
+# list<-mlpack::kmeans::mlkmeans(data, 3)
+#print('Test')
+# print(result)
+*/
+
 
 //--------------------------------------------------------------------------------------
 // HCE
@@ -109,47 +123,96 @@ struct Projection
 {
   unsigned int refDim;
   std::list<unsigned int> condDim;
+  double contrast;
 };
 
 // [[Rcpp::export]]
  double cmi(Rcpp::NumericVector subspace, Rcpp::NumericMatrix data){
    double cmiContrast = 0.0;
    double tmpContrast = 0.0;
-
+   double tmp = 0.0;
+   Projection p2dim;
+   p2dim.contrast = 0.0;
+   Projection pNextdim;
+   pNextdim.contrast = 0.0;
+   
    std::cout<<"subspace.size:"<<subspace.size()<<std::endl;
 
+   
    //start with 2-dim projections
    for (unsigned int i=0; i<subspace.size(); i++){
      for(unsigned int j=0; j<subspace.size(); j++){
        if(i!=j){
            // todo: Kontrast berechnen: tmpContrast =    1.) hce(Xi) - chce(Xi | Xj) oder 2.) hce(Xj) - chce(Xj | Xi) ???
             // 1: Implement. in CMI.R und 2: Formel aus Paper (?)
-           // hCE(dt[[ subspace[i] ]]) in R: liefert einen Vektor einer Spalte (der subspace[i].-Spalte) des dt, d.h. hCE wird nur fuer diese Spalte berechnet, richtig?
+           // hCE(dt[[ subspace[i] ]]) in R: liefert einen Vektor einer Spalte (der subspace[i].-Spalte) des dt, 
+           //     d.h. hCE wird nur fuer diese Spalte berechnet, richtig?
            //j.th column of data is copied to a numeric vector
            NumericVector attr = data( _, j);
            //conversion to std::vector
            std::vector<double> dat = Rcpp::as<std::vector<double> >(attr);
 
+           // todo: when chce is complete: add it to calcul.:
            tmpContrast = calcHce(dat); //Content from all: data[*][j]
 
-           //store contrast
-
-           std::map<double, Projection> contrastMap;
-           Projection p2dim;
-           p2dim.refDim = subspace[j];
-
-           std::list<unsigned int> cd;
-           cd.push_back(subspace[i]);
-           p2dim.condDim = cd;
-           contrastMap.insert(std::make_pair(tmpContrast, p2dim));
+          
+           
+           if(tmpContrast > p2dim.contrast){
+             //store contrast
+             
+             p2dim.refDim = subspace[i];
+             std::list<unsigned int> cd;
+             cd.push_back(subspace[j]);
+             p2dim.condDim = cd;
+             p2dim.contrast = tmpContrast;
+            
+           }
        }
      }
   }
-   // todo:
+ 
+   cmiContrast += p2dim.contrast;
 
-   cmiContrast += tmpContrast;
+   // todo: subspace kürzen: Komplement bilden: Subspace ohne die Dim. mit höchstem Kontrast
+   // in R: subspace <- ... -which(subspace %in% initialSubspace$sub)
+  
+  /*for (i=subspace.begin();i<subspace.end();i++)
+  {
+    if ( subspace[i] == p2dim.refDim or subspace[i] in p2dim.condDim)
+    {
+      subspace.erase(i);
+    }
+  }*/
+   
+   while(subspace.size() > 0){        // while still dimensions left
+     for(unsigned int i=0; i<subspace.size(); i++) {
+       
+       /*tmp = hCE(dt[[ subspace[i] ]]) - conditionalhCE( dt,
+                                                        referenceDim = subspace[i],
+                                                        conditionalDim = initialSubspace$sub,
+                                                       numClusters = 10)
+        */ 
 
-
+       if(tmp > pNextdim.contrast){
+          pNextdim.refDim = subspace[i];
+          std::list<unsigned int> cdn;
+          //cdn.push_back(p2dim.condDim);
+          
+          pNextdim.condDim = p2dim.condDim;
+         // = list(sub = c(subspace[i], initialSubspace$sub), 
+          pNextdim.contrast = tmp;
+       }
+     }
+       cmiContrast += pNextdim.contrast;
+       p2dim = pNextdim;
+       
+       /*
+       totalContrast <- totalContrast + nextSubspace$contrast
+       initialSubspace <- nextSubspace //# update subspace
+       nextSubspace <- list(sub = c(), contrast = 0) //# we only take the best dimension level wise
+       subspace <- subspace[-which(subspace %in% initialSubspace$sub)] // remove added dimension from remaining dimensions
+      */
+   }     
    return cmiContrast;
  }
 
