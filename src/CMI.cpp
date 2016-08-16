@@ -1,6 +1,6 @@
 #include "CMI.h"
 #include <Rcpp.h>
-#include <algorithm>    // std::sort
+#include <algorithm>    
 #include <vector>
 #include <Rcpp.h>
 using namespace Rcpp;
@@ -15,16 +15,7 @@ using namespace Rcpp;
 double calcHce(std::vector<double> space) {
   double hce = 0.0000;
 
-// Sort
   std::sort (space.begin(), space.end());
-
-// Print after sort
-  std::vector<double>::const_iterator i;
-  std::cout<<"Vektor nach Sortierung:"<<std::endl;
-  for(i=space.begin(); i!=space.end(); ++i){
-    std::cout<<(*i)<<std::endl;
-  }
-
 
 
 //Hce-Calculation
@@ -38,29 +29,13 @@ double calcHce(std::vector<double> space) {
       return -hce;
 }
 
-/*
-// [[Rcpp::export]]
-double testHce(){
-    std::vector<double> s;
-  //  s.push_back(999);
-    s.push_back(1.0);
-    s.push_back(2.0);
-    s.push_back(9.0);
-    s.push_back(5.0);
-    s.push_back(455.0);
-
-
-    double Hces = calcHce(s);
-    return Hces;
-}
-*/
 
 //--------------------------------------------------------------------------------------
 //  cHce
 //--------------------------------------------------------------------------------------
  double calcCHce(std::vector<double> data, int refDim, int conDim, unsigned int numClust){
 
-   double chce = 0;
+   double chce = 0.0;
    // Clustering of "data": todo
 
 
@@ -72,24 +47,6 @@ double testHce(){
 //
    return chce;
  }
-
-/*
-// [[Rcpp::export]]
-double testcHce(){
-
-  std::vector<double> s;
-
-
-  s.push_back(1.0);
-  s.push_back(2.0);
-  s.push_back(5.0);
-  s.push_back(9.0);
-  s.push_back(455.0);
-  s.push_back(999);
-  double cHce = calcCHce(s,3,4,2);
-  return cHce;
-}
-*/
 
 /*
 double conditionalHce(NumericMatrix x, ...){
