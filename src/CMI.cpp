@@ -33,7 +33,7 @@ double calcHce(std::vector<double> space) {
 //--------------------------------------------------------------------------------------
 //  cHce
 //--------------------------------------------------------------------------------------
- double calcCHce(std::vector<double> data, int refDim, int conDim, unsigned int numClust){
+ double calcCHce(std::vector<double> data, std::vector<double> dim, unsigned int numClust){
 
    double chce = 0.0;
    // Clustering of "data": todo
@@ -48,36 +48,22 @@ double calcHce(std::vector<double> space) {
    return chce;
  }
 
-/*
-double conditionalHce(NumericMatrix x, ...){
-  kmeans(x)
-}
- */
 
 
 //--------------------------------------------------------------------------------------
 // CMI
 //--------------------------------------------------------------------------------------
-struct Projection
-{
-  unsigned int refDim;
-  std::vector<unsigned int> condDim;
-  double contrast;
-};
 
 // [[Rcpp::export]]
  double cmi(Rcpp::NumericVector subspace, Rcpp::NumericMatrix data){
    double cmiContrast = 0.0;
    double tmpContrast = 0.0;
    double tmp = 0.0;
-   Projection p2dim;
-   p2dim.contrast = 0.0;
-   Projection pNextdim;
-   pNextdim.contrast = 0.0;
-   
-   std::cout<<"subspace.size:"<<subspace.size()<<std::endl;
-
-   
+   std::vector<unsigned int> p2dim, pNextdim;
+   double p2dimContrast = 0.0;
+   double pNextdimContrast = 0.0;
+   unsigned int nextDim;   
+  
    //start with 2-dim projections
    for (unsigned int i=0; i<subspace.size(); i++){
      for(unsigned int j=0; j<subspace.size(); j++){
@@ -93,70 +79,63 @@ struct Projection
 
           
            
-           if(tmpContrast > p2dim.contrast){
-             //store contrast
-             p2dim.refDim = subspace[i];
-             std::vector<unsigned int> cd;
-             cd.push_back(subspace[j]);
-             p2dim.condDim = cd;
-             p2dim.contrast = tmpContrast;
+           if(tmpContrast > p2dimContrast){
+             //store contrast & best Projection
+             p2dim.push_back(subspace[j]); //condDim
+             p2dim.push_back(subspace[i]); //refDim
+             p2dimContrast = tmpContrast;
             
            }
        }
      }
   }
  
-   cmiContrast += p2dim.contrast;
+   cmiContrast += p2dimContrast;
 
-   // todo: subspace kürzen: Komplement bilden: Subspace ohne die Dim. mit höchstem Kontrast
-   // in R: subspace <- ... -which(subspace %in% initialSubspace$sub)
-  
+   // build subspace without highest 2-Dim.
   std::vector<double> subspaceVec = Rcpp::as<std::vector<double> >(subspace);
   for (std::vector<double>::iterator it=subspaceVec.begin();it<subspaceVec.end();it++)
   {
-    // todo: vector statt struct (konvention: letztes Element = refDim)
-    if ( *it == p2dim.refDim or *it == p2dim.condDim[0]) {
+    if ( *it == p2dim[0] or *it == p2dim[1]) {
       subspaceVec.erase(it);
     } 
-     else {
-      for (unsigned int i=0; i<2; i++) 
-      if ( *it == p2dim.condDim[i]) {
-        subspaceVec.erase(it);
-      }  
-    }
   }
    
+   // continue with greater projections
+   pNextdim = p2dim;
+   
    while(subspaceVec.size() > 0){        // while still dimensions left
+     pNextdimContrast = 0.0;
+     
      for(unsigned int i=0; i<subspaceVec.size(); i++) {
+      
+       p2dim.push_back(subspaceVec[i]);
        
        /*tmp = hCE(dt[[ subspace[i] ]]) - conditionalhCE( dt,
                                                         referenceDim = subspace[i],
                                                         conditionalDim = initialSubspace$sub,
                                                        numClusters = 10)
         */ 
-       // todo: vervollstaendigen:
+       // todo: vervollstaendigen: tmp = hce("subspaceVec[i]") - chce("p2dim")
        //tmp = calcHce(data[subspace[i]]);
 
-       if(tmp > pNextdim.contrast){
-          pNextdim.refDim = subspaceVec[i];
-          
-          // add refDim and condDim from old vector to the new one
-          pNextdim.condDim.push_back(p2dim.refDim);
-          pNextdim.condDim.insert(pNextdim.condDim.end(), p2dim.condDim.begin(), p2dim.condDim.end());
-         
-          pNextdim.contrast = tmp;
+       if(tmp > pNextdimContrast){
+        
+          nextDim = subspaceVec[i];
+          pNextdimContrast = tmp;
        }
+       p2dim.pop_back();
      }
-       cmiContrast += pNextdim.contrast;
-       p2dim = pNextdim;
-       // todo: pNextdim initialisieren und subspaceVec kuerzen
-       
-       /*
-       totalContrast <- totalContrast + nextSubspace$contrast
-       initialSubspace <- nextSubspace //# update subspace
-       nextSubspace <- list(sub = c(), contrast = 0) //# we only take the best dimension level wise
-       subspace <- subspace[-which(subspace %in% initialSubspace$sub)] // remove added dimension from remaining dimensions
-      */
+       cmiContrast += pNextdimContrast;
+       pNextdim.push_back(nextDim);
+       p2dim = pNextdim; 
+       // shorten subspace
+       for (std::vector<double>::iterator it=subspaceVec.begin();it<subspaceVec.end();it++)
+       {
+         if ( *it == nextDim) {
+           subspaceVec.erase(it);
+         } 
+       }
    }     
    return cmiContrast;
  }
