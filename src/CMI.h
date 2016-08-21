@@ -21,8 +21,7 @@
 
 
 // calculate cond. hce
-// todo: data is Rcpp::NumericMatrix
-   double calcCHce(std::vector<double> data, int refDim, int conDim, unsigned int numClust);
+   double calcCHce(Rcpp::NumericMatrix data, int refDim, int conDim, unsigned int numClust);
 //   //data, referenceDim, conditionalDim, numClusters = 1)
 
 

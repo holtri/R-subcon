@@ -33,12 +33,18 @@ double calcHce(std::vector<double> space) {
 //--------------------------------------------------------------------------------------
 //  cHce
 //--------------------------------------------------------------------------------------
- double calcCHce(std::vector<double> data, std::vector<double> dim, unsigned int numClust){
+ double calcCHce(Rcpp::NumericMatrix data, std::vector<double> dim, unsigned int numClust){
 
    double chce = 0.0;
+   
+
+   std::vector<double> conDim = dim;
+   NumericVector conDim2 = Rcpp::wrap(dim);
+   conDim.pop_back(); // delete the refDim (per def.: the last element)
    // Clustering of "data": todo
-
-
+   /*** R
+     clusters <- kmeans(as.matrix(data[, conDim2, with=F]), numClusters)
+   */
 // Pro Cluster hce berechnen
    for (unsigned int i=0; i<numClust; i++){
 //     chce = chce + cluster.size()/data.size() * calcHce(); // todo: vervollstaendigen
