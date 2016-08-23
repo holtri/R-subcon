@@ -3,7 +3,12 @@
 #include <algorithm>    
 #include <vector>
 #include <Rcpp.h>
+#include <C:/R/R-3.3.1/library/RcppShark/include/shark/Algorithms/KMeans.h> //k-means algorithm
+#include <shark/Models/Clustering/Centroids.h>//model performing hard clustering of points
+#include <shark/Models/Clustering/HardClusteringModel.h>//model performing hard clustering of points
+#include "utils.h" // some conversion helpers
 using namespace Rcpp;
+using namespace shark;
 
 
 
@@ -42,9 +47,8 @@ double calcHce(std::vector<double> space) {
    NumericVector conDim2 = Rcpp::wrap(dim);
    conDim.pop_back(); // delete the refDim (per def.: the last element)
    // Clustering of "data": todo
-   /*** R
-     clusters <- kmeans(as.matrix(data[, conDim2, with=F]), numClusters)
-   */
+   Rcpp::List model = SharkKMeansTrain (data, numClust)
+
 // Pro Cluster hce berechnen
    for (unsigned int i=0; i<numClust; i++){
 //     chce = chce + cluster.size()/data.size() * calcHce(); // todo: vervollstaendigen
