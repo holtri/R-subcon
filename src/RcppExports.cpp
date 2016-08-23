@@ -6,13 +6,13 @@
 using namespace Rcpp;
 
 // calcHce
-double calcHce(std::vector<double> space);
-RcppExport SEXP subcon_calcHce(SEXP spaceSEXP) {
+double calcHce(std::vector<double> dataVector);
+RcppExport SEXP subcon_calcHce(SEXP dataVectorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector<double> >::type space(spaceSEXP);
-    __result = Rcpp::wrap(calcHce(space));
+    Rcpp::traits::input_parameter< std::vector<double> >::type dataVector(dataVectorSEXP);
+    __result = Rcpp::wrap(calcHce(dataVector));
     return __result;
 END_RCPP
 }
