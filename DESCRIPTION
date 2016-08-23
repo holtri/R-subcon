@@ -16,7 +16,7 @@ Imports:
     FNN,
     ROCR,
     assertthat
-LinkingTo: Rcpp
+LinkingTo: Rcpp, RcppShark, BH
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
 Suggests: testthat
