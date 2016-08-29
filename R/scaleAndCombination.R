@@ -7,6 +7,33 @@ madStd <- function(x){
   }
 }
 
+#' Gauss Normalization
+#'
+#' Fits a Gauss distribution to nromalize score values as suggested by Kriegel et al.
+#'
+#' @param x outlier scores to normalize
+#'
+#' @references Kriegel, Hans-Peter, Peer Kroger, Erich Schubert, and Arthur
+#'   Zimek. 2011. Interpreting and Unifying Outlier Scores. In Proceedings of
+#'   the 2011 SIAM International Conference on Data Mining, p. 13 - 24.
+#'
+#' @return normalized outlier scores
+#' @export
+gaussNorm <- function(x){
+  mu <- mean(x)
+  s <- mean(x^2) - mean(x)^2
+
+  erf <- function(a){
+    2 * pnorm(x * sqrt(2)) - 1
+  }
+
+  sapply(x, function(a){
+    cdfs <- 0.5* (1 + erf((a-mu)/(s*sqrt(2))))
+    max(0, 2*cdfs -1)
+  })
+}
+
+
 #' Gamma Normalization
 #'
 #' Fits a gamma distribution with the moment estimators for shape and scale
