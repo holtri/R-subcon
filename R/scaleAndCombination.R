@@ -24,7 +24,7 @@ gaussNorm <- function(x){
   s <- mean(x^2) - mean(x)^2
 
   erf <- function(a){
-    2 * pnorm(x * sqrt(2)) - 1
+    2 * pnorm(a * sqrt(2)) - 1
   }
 
   sapply(x, function(a){
