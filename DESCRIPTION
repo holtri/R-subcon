@@ -21,3 +21,4 @@ LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
 Depends: RcppArmadillo
+Suggests: testthat

@@ -3,13 +3,13 @@
 using namespace Rcpp;
 
 Rcpp::List reverseNearestNeighborsC(arma::mat knn) {
-  std::map<int, std::vector<int> > rnn;
-  std::vector<std::vector <int> > result;
+  std::map<int, std::set<int> > rnn;
+  std::vector<std::set <int> > result;
 
   for(arma::uword r=0; r < knn.n_rows; ++r){
     auto it_end = knn.end_row(r);
     for(auto it = knn.begin_row(r); it!= it_end; ++it){
-      rnn[*it].push_back(r);
+      rnn[*it].insert(r + 1);
     }
   }
 
