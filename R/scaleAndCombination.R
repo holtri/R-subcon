@@ -23,6 +23,10 @@ gaussNorm <- function(x){
   mu <- mean(x)
   s <- mean(x^2) - mean(x)^2
 
+  if(s==0){
+    return(rep(0, length(x)))
+  }
+
   erf <- function(a){
     2 * pnorm(a * sqrt(2)) - 1
   }
@@ -50,6 +54,11 @@ gaussNorm <- function(x){
 gammaNorm <- function(x){
   mu <- mean(x)
   s <- sd(x)
+
+  if(s==0){
+    return(rep(0, length(x)))
+  }
+
   k <- mu^2/s^2
   teta <- s^2 / mu
   mucdf <- pgamma(mu, shape = k, scale = teta)
