@@ -12,10 +12,12 @@ License: tbd
 LazyData: TRUE
 Imports:
     Rcpp (>= 0.12.2),
+    RcppArmadillo (>= 0.7.200.2),
     data.table,
     FNN,
     ROCR,
     assertthat
-LinkingTo: Rcpp
+LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
+Depends: RcppArmadillo

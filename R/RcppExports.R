@@ -157,6 +157,17 @@ HiCSSearch <- function(indexMap, alpha, numRuns, topkSearch, topkOutput) {
     .Call('subcon_HiCSSearch', PACKAGE = 'subcon', indexMap, alpha, numRuns, topkSearch, topkOutput)
 }
 
+#' Reverse Nearest Neighbors
+#'
+#' Extracts the reverse nearest neighbors for a given knn matrix
+#'
+#' @param knn n x k Matrix of knn indices
+#'
+#' @export
+reverseNearestNeighborsC <- function(knn) {
+    .Call('subcon_reverseNearestNeighborsC', PACKAGE = 'subcon', knn)
+}
+
 #' LOF reachability distance
 #'
 #' Calculates reachability distance for all objects
