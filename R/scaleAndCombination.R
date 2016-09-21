@@ -9,7 +9,7 @@ madStd <- function(x){
 
 #' Gauss Normalization
 #'
-#' Fits a Gauss distribution to nromalize score values as suggested by Kriegel et al.
+#' Fits a Gauss distribution to normalize score values as suggested by Kriegel et al.
 #'
 #' @param x outlier scores to normalize
 #'
@@ -76,7 +76,7 @@ gammaNorm <- function(x){
 #'
 #' @return list containing the pairwise sum
 #' @export
-sumCombination <- function(x,y) unlist(x) + unlist(y)
+sumCombination <- function(x,y) {unlist(x) + unlist(y)}
 
 #' Max Combination Function
 #'
@@ -86,4 +86,4 @@ sumCombination <- function(x,y) unlist(x) + unlist(y)
 #'
 #' @return list containing the pairwise maximum
 #' @export
-maxCombination <- function(x,y) pmax(unlist(x), unlist(y))
+maxCombination <- function(x,y) {pmax(unlist(x), unlist(y))}
