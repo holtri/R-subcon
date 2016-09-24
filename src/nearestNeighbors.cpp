@@ -6,6 +6,10 @@ Rcpp::List reverseNearestNeighborsC(arma::mat knn) {
   std::map<int, std::set<int> > rnn;
   std::vector<std::set <int> > result;
 
+  for(unsigned int i=0; i<knn.n_rows; ++i){
+    rnn[i+1] = std::set<int>();
+  }
+
   for(arma::uword r=0; r < knn.n_rows; ++r){
     auto it_end = knn.end_row(r);
     for(auto it = knn.begin_row(r); it!= it_end; ++it){
@@ -13,7 +17,7 @@ Rcpp::List reverseNearestNeighborsC(arma::mat knn) {
     }
   }
 
-  for (const auto &s : rnn){
+  for(const auto &s : rnn){
     result.push_back(s.second);
   }
 
