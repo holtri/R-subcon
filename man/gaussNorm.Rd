@@ -13,7 +13,7 @@ gaussNorm(x)
 normalized outlier scores
 }
 \description{
-Fits a Gauss distribution to nromalize score values as suggested by Kriegel et al.
+Fits a Gauss distribution to normalize score values as suggested by Kriegel et al.
 }
 \references{
 Kriegel, Hans-Peter, Peer Kroger, Erich Schubert, and Arthur

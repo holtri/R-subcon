@@ -1,8 +1,8 @@
 Package: subcon
 Type: Package
 Title: Collection of subspace search functions
-Version: 0.0.0.9000
-Date: 2016-01-13
+Version: 0.0.0.9003
+Date: 2017-06-27
 Authors@R: person("Holger", "Trittenbach", email = "holger.trittenbach@gmail.com",
                   role=c("aut", "cre"))
 Maintainer: Holger Trittenbach <holger.trittenbach@gmail.com>

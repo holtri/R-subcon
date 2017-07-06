@@ -25,11 +25,11 @@ using namespace Rcpp;
 //' @seealso \code{\link{HiCSContrastC}}, \code{\link{sortedIndexMatrix}}
 //'
 //' @references Keller, Fabian, Emmanuel Muller, and Klemens Bohm. 2012. HiCS:
-//'   High Contrast Subspaces for Density-Based Outlier Ranking. In 2012 IEEE
-//'   28th International Conference on Data Engineering, 1037 – 48. IEEE.
+//'   High Contrast Subspaces for Density-Based Outlier Ranking.
+//'   IEEE International Conference on Data Engineering, 2012
 //'
 //' @export
 // [[Rcpp::export]]
-List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput);
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput, int seed = -1);
 
 #endif

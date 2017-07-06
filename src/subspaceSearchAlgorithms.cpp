@@ -14,8 +14,11 @@ std::vector<int> sortIndices(const NumericVector &input){
   return idx;
 }
 
-std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns){
+std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns, int seed = -1){
 
+  if(seed>0){
+    srand(seed);
+  }
   std::vector<NumericVector> outputSpaces(indexMap.ncol());
 
   List deviationStatistics2Dim = deviationStatisticsC(indexMap, alpha, numRuns);

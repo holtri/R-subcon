@@ -52,6 +52,6 @@ std::vector<int> sortIndices(const NumericVector &input);
 //' @return List of deviation maximizing subspaces, one for each reference dimension.
 //' @export
 // [[Rcpp::export]]
-std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns);
+std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns, int seed = -1);
 
 #endif

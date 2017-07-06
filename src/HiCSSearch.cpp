@@ -113,7 +113,11 @@ Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspac
   return result;
 }
 
-List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput){
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput, int seed = -1){
+
+  if(seed>0){
+    srand(seed);
+  }
 
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> searchBeam;
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam;
