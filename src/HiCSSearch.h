@@ -38,4 +38,6 @@ bool containsProjection(std::set<std::set<int> > subspaces, std::vector<int> can
 
 std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > initialSpaces);
 
+std::vector< std::vector<int> > twoDimProjections(int dimensionality);
+
 #endif

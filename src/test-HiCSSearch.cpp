@@ -74,5 +74,28 @@ context("aprioriMerge") {
     std::vector< std::vector<int> > result = aprioriMerge(initialSpaces);
     expect_true(result.size() == 0);
   }
+
+  test_that("generate 2-dim projections 1"){
+    std::vector<std::vector<int> > result = twoDimProjections(2);
+    std::vector<int> expected = {1,2};
+    expect_true(result.size() == 1);
+    expect_true(result[0] == expected);
+  }
+
+  test_that("generate 2-dim projections 2 "){
+    expect_true(twoDimProjections(5).size() == 10);
+    expect_true(twoDimProjections(30).size() == (30*29/2));
+  }
+
+  test_that("Apriori merge on two-dim projections"){
+    std::vector<std::vector<int> > initialSpaces = twoDimProjections(5);
+    expect_true(initialSpaces.size() == 10);
+    std::vector< std::vector<int> > result = aprioriMerge(initialSpaces);
+    expect_true(result.size() == 10); //10 3-dim spaces
+    result = aprioriMerge(result);
+    expect_true(result.size() == 5); //5 4-dim spaces
+    result = aprioriMerge(result);
+    expect_true(result.size() == 1); //1 5-dim spaces
+  }
 }
 
