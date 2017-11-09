@@ -1,7 +1,7 @@
 Package: subcon
 Type: Package
 Title: Collection of subspace search functions
-Version: 0.0.0.9003
+Version: 0.0.0.9007
 Date: 2017-06-27
 Authors@R: person("Holger", "Trittenbach", email = "holger.trittenbach@gmail.com",
                   role=c("aut", "cre"))
