@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // KSTestC
 double KSTestC(LogicalVector indexSelection, NumericVector indexMapReferenceAttribute);
-RcppExport SEXP subcon_KSTestC(SEXP indexSelectionSEXP, SEXP indexMapReferenceAttributeSEXP) {
+RcppExport SEXP _subcon_KSTestC(SEXP indexSelectionSEXP, SEXP indexMapReferenceAttributeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // randomSubspaceSliceC
 LogicalVector randomSubspaceSliceC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim);
-RcppExport SEXP subcon_randomSubspaceSliceC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP) {
+RcppExport SEXP _subcon_randomSubspaceSliceC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -34,7 +34,7 @@ END_RCPP
 }
 // averageDeviationC
 double averageDeviationC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns);
-RcppExport SEXP subcon_averageDeviationC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
+RcppExport SEXP _subcon_averageDeviationC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -49,7 +49,7 @@ END_RCPP
 }
 // deviationVectorC
 NumericVector deviationVectorC(NumericMatrix indexMap, NumericVector subspace, double alpha, int referenceDim, int numRuns);
-RcppExport SEXP subcon_deviationVectorC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
+RcppExport SEXP _subcon_deviationVectorC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP referenceDimSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -64,7 +64,7 @@ END_RCPP
 }
 // deviationStatisticsC
 List deviationStatisticsC(NumericMatrix indexMap, double alpha, int numRuns);
-RcppExport SEXP subcon_deviationStatisticsC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+RcppExport SEXP _subcon_deviationStatisticsC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -77,7 +77,7 @@ END_RCPP
 }
 // HiCSContrastC
 double HiCSContrastC(NumericMatrix indexMap, NumericVector subspace, double alpha, int numRuns);
-RcppExport SEXP subcon_HiCSContrastC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+RcppExport SEXP _subcon_HiCSContrastC(SEXP indexMapSEXP, SEXP subspaceSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -91,7 +91,7 @@ END_RCPP
 }
 // deviationMatrixC
 NumericMatrix deviationMatrixC(NumericMatrix indexMap, double alpha, int numRuns);
-RcppExport SEXP subcon_deviationMatrixC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+RcppExport SEXP _subcon_deviationMatrixC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -104,7 +104,7 @@ END_RCPP
 }
 // HiCSMatrixC
 NumericMatrix HiCSMatrixC(NumericMatrix indexMap, double alpha, int numRuns);
-RcppExport SEXP subcon_HiCSMatrixC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
+RcppExport SEXP _subcon_HiCSMatrixC(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -117,7 +117,7 @@ END_RCPP
 }
 // HiCSSearch
 List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput, int seed);
-RcppExport SEXP subcon_HiCSSearch(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP, SEXP topkSearchSEXP, SEXP topkOutputSEXP, SEXP seedSEXP) {
+RcppExport SEXP _subcon_HiCSSearch(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP, SEXP topkSearchSEXP, SEXP topkOutputSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -133,7 +133,7 @@ END_RCPP
 }
 // reverseNearestNeighborsC
 Rcpp::List reverseNearestNeighborsC(arma::mat knn);
-RcppExport SEXP subcon_reverseNearestNeighborsC(SEXP knnSEXP) {
+RcppExport SEXP _subcon_reverseNearestNeighborsC(SEXP knnSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -144,7 +144,7 @@ END_RCPP
 }
 // reachability
 NumericVector reachability(NumericMatrix knnIndex, NumericMatrix knnDistance, NumericVector maxkIdx);
-RcppExport SEXP subcon_reachability(SEXP knnIndexSEXP, SEXP knnDistanceSEXP, SEXP maxkIdxSEXP) {
+RcppExport SEXP _subcon_reachability(SEXP knnIndexSEXP, SEXP knnDistanceSEXP, SEXP maxkIdxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -157,7 +157,7 @@ END_RCPP
 }
 // lofCalculation
 NumericVector lofCalculation(NumericVector lrd, NumericMatrix knnIndex, NumericVector maxkIdx);
-RcppExport SEXP subcon_lofCalculation(SEXP lrdSEXP, SEXP knnIndexSEXP, SEXP maxkIdxSEXP) {
+RcppExport SEXP _subcon_lofCalculation(SEXP lrdSEXP, SEXP knnIndexSEXP, SEXP maxkIdxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -170,7 +170,7 @@ END_RCPP
 }
 // GMD
 std::vector<NumericVector> GMD(NumericMatrix indexMap, double alpha, int numRuns, int seed);
-RcppExport SEXP subcon_GMD(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP, SEXP seedSEXP) {
+RcppExport SEXP _subcon_GMD(SEXP indexMapSEXP, SEXP alphaSEXP, SEXP numRunsSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -183,20 +183,23 @@ BEGIN_RCPP
 END_RCPP
 }
 
+RcppExport SEXP run_testthat_tests();
+
 static const R_CallMethodDef CallEntries[] = {
-    {"subcon_KSTestC", (DL_FUNC) &subcon_KSTestC, 2},
-    {"subcon_randomSubspaceSliceC", (DL_FUNC) &subcon_randomSubspaceSliceC, 4},
-    {"subcon_averageDeviationC", (DL_FUNC) &subcon_averageDeviationC, 5},
-    {"subcon_deviationVectorC", (DL_FUNC) &subcon_deviationVectorC, 5},
-    {"subcon_deviationStatisticsC", (DL_FUNC) &subcon_deviationStatisticsC, 3},
-    {"subcon_HiCSContrastC", (DL_FUNC) &subcon_HiCSContrastC, 4},
-    {"subcon_deviationMatrixC", (DL_FUNC) &subcon_deviationMatrixC, 3},
-    {"subcon_HiCSMatrixC", (DL_FUNC) &subcon_HiCSMatrixC, 3},
-    {"subcon_HiCSSearch", (DL_FUNC) &subcon_HiCSSearch, 6},
-    {"subcon_reverseNearestNeighborsC", (DL_FUNC) &subcon_reverseNearestNeighborsC, 1},
-    {"subcon_reachability", (DL_FUNC) &subcon_reachability, 3},
-    {"subcon_lofCalculation", (DL_FUNC) &subcon_lofCalculation, 3},
-    {"subcon_GMD", (DL_FUNC) &subcon_GMD, 4},
+    {"_subcon_KSTestC", (DL_FUNC) &_subcon_KSTestC, 2},
+    {"_subcon_randomSubspaceSliceC", (DL_FUNC) &_subcon_randomSubspaceSliceC, 4},
+    {"_subcon_averageDeviationC", (DL_FUNC) &_subcon_averageDeviationC, 5},
+    {"_subcon_deviationVectorC", (DL_FUNC) &_subcon_deviationVectorC, 5},
+    {"_subcon_deviationStatisticsC", (DL_FUNC) &_subcon_deviationStatisticsC, 3},
+    {"_subcon_HiCSContrastC", (DL_FUNC) &_subcon_HiCSContrastC, 4},
+    {"_subcon_deviationMatrixC", (DL_FUNC) &_subcon_deviationMatrixC, 3},
+    {"_subcon_HiCSMatrixC", (DL_FUNC) &_subcon_HiCSMatrixC, 3},
+    {"_subcon_HiCSSearch", (DL_FUNC) &_subcon_HiCSSearch, 6},
+    {"_subcon_reverseNearestNeighborsC", (DL_FUNC) &_subcon_reverseNearestNeighborsC, 1},
+    {"_subcon_reachability", (DL_FUNC) &_subcon_reachability, 3},
+    {"_subcon_lofCalculation", (DL_FUNC) &_subcon_lofCalculation, 3},
+    {"_subcon_GMD", (DL_FUNC) &_subcon_GMD, 4},
+    {"run_testthat_tests",               (DL_FUNC) &run_testthat_tests,               0},
     {NULL, NULL, 0}
 };
 

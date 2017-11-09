@@ -16,7 +16,7 @@
 #' @seealso \code{\link{randomSubspaceSliceC}}, \code{\link{sortedIndexMatrix}}
 #' @export
 KSTestC <- function(indexSelection, indexMapReferenceAttribute) {
-    .Call('subcon_KSTestC', PACKAGE = 'subcon', indexSelection, indexMapReferenceAttribute)
+    .Call(`_subcon_KSTestC`, indexSelection, indexMapReferenceAttribute)
 }
 
 #' Random selection of a subspace slice
@@ -35,7 +35,7 @@ KSTestC <- function(indexSelection, indexMapReferenceAttribute) {
 #' @seealso \code{\link{sortedIndexMatrix}}
 #' @export
 randomSubspaceSliceC <- function(indexMap, subspace, alpha, referenceDim) {
-    .Call('subcon_randomSubspaceSliceC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim)
+    .Call(`_subcon_randomSubspaceSliceC`, indexMap, subspace, alpha, referenceDim)
 }
 
 #' Deviation
@@ -58,15 +58,15 @@ randomSubspaceSliceC <- function(indexMap, subspace, alpha, referenceDim) {
 #' @seealso \code{\link{sortedIndexMatrix}}
 #' @export
 averageDeviationC <- function(indexMap, subspace, alpha, referenceDim, numRuns) {
-    .Call('subcon_averageDeviationC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim, numRuns)
+    .Call(`_subcon_averageDeviationC`, indexMap, subspace, alpha, referenceDim, numRuns)
 }
 
 deviationVectorC <- function(indexMap, subspace, alpha, referenceDim, numRuns) {
-    .Call('subcon_deviationVectorC', PACKAGE = 'subcon', indexMap, subspace, alpha, referenceDim, numRuns)
+    .Call(`_subcon_deviationVectorC`, indexMap, subspace, alpha, referenceDim, numRuns)
 }
 
 deviationStatisticsC <- function(indexMap, alpha, numRuns) {
-    .Call('subcon_deviationStatisticsC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+    .Call(`_subcon_deviationStatisticsC`, indexMap, alpha, numRuns)
 }
 
 #' HiCS contrast
@@ -85,7 +85,7 @@ deviationStatisticsC <- function(indexMap, alpha, numRuns) {
 #' @return double, the HiCS contrast for the subspace.
 #' @export
 HiCSContrastC <- function(indexMap, subspace, alpha, numRuns) {
-    .Call('subcon_HiCSContrastC', PACKAGE = 'subcon', indexMap, subspace, alpha, numRuns)
+    .Call(`_subcon_HiCSContrastC`, indexMap, subspace, alpha, numRuns)
 }
 
 #' Deviation matrix
@@ -105,7 +105,7 @@ HiCSContrastC <- function(indexMap, subspace, alpha, numRuns) {
 #'   This matrix is asymmetric in general.
 #' @export
 deviationMatrixC <- function(indexMap, alpha, numRuns) {
-    .Call('subcon_deviationMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+    .Call(`_subcon_deviationMatrixC`, indexMap, alpha, numRuns)
 }
 
 #' HiCS matrix
@@ -124,7 +124,7 @@ deviationMatrixC <- function(indexMap, alpha, numRuns) {
 #'   deviation when the reference dimension is selected randomly.
 #' @export
 HiCSMatrixC <- function(indexMap, alpha, numRuns) {
-    .Call('subcon_HiCSMatrixC', PACKAGE = 'subcon', indexMap, alpha, numRuns)
+    .Call(`_subcon_HiCSMatrixC`, indexMap, alpha, numRuns)
 }
 
 #' HiCS Search
@@ -154,7 +154,7 @@ HiCSMatrixC <- function(indexMap, alpha, numRuns) {
 #'
 #' @export
 HiCSSearch <- function(indexMap, alpha, numRuns, topkSearch, topkOutput, seed = -1L) {
-    .Call('subcon_HiCSSearch', PACKAGE = 'subcon', indexMap, alpha, numRuns, topkSearch, topkOutput, seed)
+    .Call(`_subcon_HiCSSearch`, indexMap, alpha, numRuns, topkSearch, topkOutput, seed)
 }
 
 #' Reverse Nearest Neighbors
@@ -165,7 +165,7 @@ HiCSSearch <- function(indexMap, alpha, numRuns, topkSearch, topkOutput, seed = 
 #'
 #' @export
 reverseNearestNeighborsC <- function(knn) {
-    .Call('subcon_reverseNearestNeighborsC', PACKAGE = 'subcon', knn)
+    .Call(`_subcon_reverseNearestNeighborsC`, knn)
 }
 
 #' LOF reachability distance
@@ -179,7 +179,7 @@ reverseNearestNeighborsC <- function(knn) {
 #'
 #' @export
 reachability <- function(knnIndex, knnDistance, maxkIdx) {
-    .Call('subcon_reachability', PACKAGE = 'subcon', knnIndex, knnDistance, maxkIdx)
+    .Call(`_subcon_reachability`, knnIndex, knnDistance, maxkIdx)
 }
 
 #' Local outlier factor calculation
@@ -193,7 +193,7 @@ reachability <- function(knnIndex, knnDistance, maxkIdx) {
 #'
 #' @export
 lofCalculation <- function(lrd, knnIndex, maxkIdx) {
-    .Call('subcon_lofCalculation', PACKAGE = 'subcon', lrd, knnIndex, maxkIdx)
+    .Call(`_subcon_lofCalculation`, lrd, knnIndex, maxkIdx)
 }
 
 #' Greedy Maximum Deviation  Heuristic
@@ -243,6 +243,6 @@ lofCalculation <- function(lrd, knnIndex, maxkIdx) {
 #' @return List of deviation maximizing subspaces, one for each reference dimension.
 #' @export
 GMD <- function(indexMap, alpha, numRuns, seed = -1L) {
-    .Call('subcon_GMD', PACKAGE = 'subcon', indexMap, alpha, numRuns, seed)
+    .Call(`_subcon_GMD`, indexMap, alpha, numRuns, seed)
 }
 

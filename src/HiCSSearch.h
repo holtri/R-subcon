@@ -1,6 +1,8 @@
 #ifndef HICSSEARCH_H
 #define HICSSEARCH_H
 
+#include <Rcpp.h>
+
 using namespace Rcpp;
 
 //' HiCS Search
@@ -31,5 +33,9 @@ using namespace Rcpp;
 //' @export
 // [[Rcpp::export]]
 List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput, int seed = -1);
+
+bool containsProjection(std::set<std::set<int> > subspaces, std::vector<int> candidate);
+
+std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > initialSpaces);
 
 #endif

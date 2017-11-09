@@ -16,8 +16,9 @@ Imports:
     data.table,
     FNN,
     ROCR,
-    assertthat
-LinkingTo: Rcpp, RcppArmadillo
+    assertthat,
+    testthat
+LinkingTo: Rcpp, RcppArmadillo, testthat
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
 Depends: RcppArmadillo
