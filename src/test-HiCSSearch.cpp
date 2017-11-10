@@ -102,7 +102,7 @@ context("aprioriMerge") {
 }
 
 context("constructResultList"){
-  test_that("keep only 2 subspaces with highest contrast") {
+  test_that("check result list order") {
     std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> searchBeam;
     searchBeam = std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>();
 
@@ -115,7 +115,6 @@ context("constructResultList"){
     pushFixedSize(searchBeam, c, 2);
 
     Rcpp::List resultList = constructResultList(searchBeam);
-
 
     std::vector<int> sa = {1,2};
     std::vector<int> sb = {3,4};
