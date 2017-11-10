@@ -25,4 +25,3 @@ Symmetric NumericMatrix with HiCS contrast that is the average
 Calculates the HiCS contrast for all 2-dimensional projections of the full
 space.
 }
-

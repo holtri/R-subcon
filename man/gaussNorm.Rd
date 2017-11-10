@@ -20,4 +20,3 @@ Kriegel, Hans-Peter, Peer Kroger, Erich Schubert, and Arthur
   Zimek. 2011. Interpreting and Unifying Outlier Scores. In Proceedings of
   the 2011 SIAM International Conference on Data Mining, p. 13 - 24.
 }
-

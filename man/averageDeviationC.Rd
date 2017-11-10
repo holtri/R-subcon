@@ -33,4 +33,3 @@ attribute.
 \seealso{
 \code{\link{sortedIndexMatrix}}
 }
-

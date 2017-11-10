@@ -9,6 +9,6 @@
 subcon A package for subspace search.
 }
 \section{TODO}{
-
+NA
 }
 

@@ -28,4 +28,3 @@ rather on the pre calculated index map.
 \seealso{
 \code{\link{sortedIndexMatrix}}
 }
-

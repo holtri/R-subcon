@@ -28,4 +28,3 @@ List of \item{initialAUC}{AUC using the full set of subspaces.}
 Removes redundant subspaces from the set as long as the final scoring yields
 a higher AUC.
 }
-

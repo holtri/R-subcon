@@ -31,4 +31,3 @@ Guilherme O. Campos, Arthur Zimek, Joerg Sander, Ricardo J. G. B.
   Datasets, and an Empirical Study.' Data Mining and Knowledge Discovery,
   January, p. 1 to 37.
 }
-

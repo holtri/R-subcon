@@ -4,7 +4,7 @@
 \alias{HiCSSearch}
 \title{HiCS Search}
 \usage{
-HiCSSearch(indexMap, alpha, numRuns, topkSearch, topkOutput)
+HiCSSearch(indexMap, alpha, numRuns, topkSearch, topkOutput, seed = -1L)
 }
 \arguments{
 \item{alpha}{Percentage of data objects to remain in the subspace slice
@@ -39,4 +39,3 @@ Keller, Fabian, Emmanuel Muller, and Klemens Bohm. 2012. HiCS:
 \seealso{
 \code{\link{HiCSContrastC}}, \code{\link{sortedIndexMatrix}}
 }
-

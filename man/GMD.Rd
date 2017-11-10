@@ -4,7 +4,7 @@
 \alias{GMD}
 \title{Greedy Maximum Deviation  Heuristic}
 \usage{
-GMD(indexMap, alpha, numRuns)
+GMD(indexMap, alpha, numRuns, seed = -1L)
 }
 \arguments{
 \item{indexMap}{Index for the data objects if ordered by dimension. Each
@@ -56,4 +56,3 @@ add dimension 4
 
 Output space for reference dimension 1: [1,2,3,4]
 }
-

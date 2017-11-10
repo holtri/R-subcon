@@ -26,4 +26,3 @@ double, the HiCS contrast for the subspace.
 \description{
 Calculates the HiCS contrast for a given subspace.
 }
-

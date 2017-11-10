@@ -15,4 +15,3 @@ list containing the pairwise maximum
 \description{
 Wrapper to take maximum of two lists
 }
-

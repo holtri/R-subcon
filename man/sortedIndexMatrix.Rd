@@ -15,4 +15,3 @@ sortedIndexMatrix(dt)
 \description{
 This is a wrapper for \code{\link{sortedIndex}}.
 }
-
