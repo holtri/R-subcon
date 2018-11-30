@@ -15,4 +15,3 @@ List of subspaces
 \description{
 Directly mines high quality subspaces from two-dimensional projections only.
 }
-

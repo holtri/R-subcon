@@ -25,4 +25,3 @@ subspace slice.
 \seealso{
 \code{\link{randomSubspaceSliceC}}, \code{\link{sortedIndexMatrix}}
 }
-

@@ -1,6 +1,8 @@
 #ifndef HICSSEARCH_H
 #define HICSSEARCH_H
 
+#include <Rcpp.h>
+#include "searchBeam.h"
 using namespace Rcpp;
 
 //' HiCS Search
@@ -25,11 +27,19 @@ using namespace Rcpp;
 //' @seealso \code{\link{HiCSContrastC}}, \code{\link{sortedIndexMatrix}}
 //'
 //' @references Keller, Fabian, Emmanuel Muller, and Klemens Bohm. 2012. HiCS:
-//'   High Contrast Subspaces for Density-Based Outlier Ranking. In 2012 IEEE
-//'   28th International Conference on Data Engineering, 1037 – 48. IEEE.
+//'   High Contrast Subspaces for Density-Based Outlier Ranking.
+//'   IEEE International Conference on Data Engineering, 2012
 //'
 //' @export
 // [[Rcpp::export]]
-List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput);
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput, int seed = -1);
+
+bool containsProjection(std::set<std::set<int> > subspaces, std::vector<int> candidate);
+
+std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > initialSpaces);
+
+std::vector< std::vector<int> > twoDimProjections(int dimensionality);
+
+Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam);
 
 #endif

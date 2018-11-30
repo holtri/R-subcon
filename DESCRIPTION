@@ -1,8 +1,8 @@
 Package: subcon
 Type: Package
 Title: Collection of subspace search functions
-Version: 0.0.0.9000
-Date: 2016-01-13
+Version: 0.0.0.9007
+Date: 2017-06-27
 Authors@R: person("Holger", "Trittenbach", email = "holger.trittenbach@gmail.com",
                   role=c("aut", "cre"))
 Maintainer: Holger Trittenbach <holger.trittenbach@gmail.com>
@@ -12,13 +12,12 @@ License: tbd
 LazyData: TRUE
 Imports:
     Rcpp (>= 0.12.2),
-    RcppArmadillo (>= 0.7.200.2),
     data.table,
     FNN,
     ROCR,
     assertthat
-LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 5.0.1
+LinkingTo: Rcpp, RcppArmadillo, testthat
+RoxygenNote: 6.0.1
 SystemRequirements: C++11
 Depends: RcppArmadillo
 Suggests: testthat

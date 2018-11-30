@@ -19,4 +19,3 @@ vector of local outlier factors
 \description{
 Calculates LOF based on reachability densitiesfor all objects
 }
-

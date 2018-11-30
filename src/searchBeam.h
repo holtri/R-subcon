@@ -1,9 +1,10 @@
 #ifndef SEARCHBEAM_H
 #define SEARCHBEAM_H
 
-using namespace Rcpp;
-
+#include <Rcpp.h>
 #include <queue>
+
+using namespace Rcpp;
 
 struct Subspace{
   std::vector<int> space;

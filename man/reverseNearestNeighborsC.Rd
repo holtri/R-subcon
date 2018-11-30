@@ -12,4 +12,3 @@ reverseNearestNeighborsC(knn)
 \description{
 Extracts the reverse nearest neighbors for a given knn matrix
 }
-

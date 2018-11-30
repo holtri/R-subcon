@@ -26,4 +26,3 @@ NumericMatrix with deviations where the row is the reference
 Calculates the deviation for all 2-dimensional projections of the full
 space.
 }
-

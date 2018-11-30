@@ -15,4 +15,3 @@ A data.table is returned that consists of indexes for the order of each column. 
 \description{
 The index map allows to create subspace slices without working on the underlying data set but rather on the ordered index.
 }
-

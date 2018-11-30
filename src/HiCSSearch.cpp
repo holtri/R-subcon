@@ -20,11 +20,12 @@ std::string toString(const std::vector<int> &vec){
   return ss.str();
 }
 
-bool containsProjection(std::set<std::vector<int> > subspaces, std::vector<int> candidate){
+bool containsProjection(std::set<std::set<int> > subspaces, std::vector<int> candidate){
   for(unsigned int i=0; i < candidate.size(); i++){
     std::vector<int> tmp = candidate;
     tmp.erase(tmp.begin()+i);
-    if(std::find(subspaces.begin(), subspaces.end(), tmp) == subspaces.end()) {
+    std::set<int> tmpset(tmp.begin(),tmp.end());
+    if(std::find(subspaces.begin(), subspaces.end(), tmpset) == subspaces.end()) {
       return false;
     }
   }
@@ -35,11 +36,12 @@ std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > ini
   typedef  std::map<std::vector<int>, std::vector<int> > PrefixMap;
   PrefixMap m;
 
-  std::set<std::vector<int> > subspaces;
+  std::set<std::set<int> > subspaces;
   for (auto it = begin (initialSpaces); it != end (initialSpaces); ++it) {
 
     std::vector<int> sub = *it;
-    subspaces.insert(sub);
+    std::set<int> subtmp(sub.begin(), sub.end());
+    subspaces.insert(subtmp);
 
     std::vector<int> prefix(sub.begin(), sub.end() -1);
     int suffix = sub[sub.size()-1];
@@ -61,8 +63,9 @@ std::vector< std::vector<int> > aprioriMerge(std::vector< std::vector<int> > ini
         std::vector<int> c = prefix;
         c.push_back(*i);
         c.push_back(*j);
+        std::sort(c.begin(), c.end()); // keep order for apriori
         // Rcpp::Rcout << "prefix: " << toString(prefix) << "suffix i:" << *i << " suffix j: " << *j <<std::endl;
-        if(containsProjection(subspaces,c)){
+        if(containsProjection(subspaces, c)){
           candidates.push_back(c);
         }
       }
@@ -113,7 +116,11 @@ Rcpp::List constructResultList(std::priority_queue<Subspace, std::vector<Subspac
   return result;
 }
 
-List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput){
+List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearch, int topkOutput, int seed = -1){
+
+  if(seed>0){
+    srand(seed);
+  }
 
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> searchBeam;
   std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp> outputBeam;
@@ -122,9 +129,9 @@ List HiCSSearch(NumericMatrix indexMap, double alpha, int numRuns, int topkSearc
   candidates = twoDimProjections(indexMap.ncol());
   int dim = 2;
   while(candidates.size()>0){
-    Rcpp::Rcout << "number of " << dim <<  "-dim candidates: " << candidates.size() << std::endl;
     searchBeam = std::priority_queue<Subspace, std::vector<Subspace>, AscendingComp>();
     updateSearchBeam(candidates, searchBeam, outputBeam, topkSearch, topkOutput, indexMap, alpha, numRuns);
+    Rcpp::Rcout << "number of " << dim <<  "-dim candidates: " << subspaceVector(searchBeam).size() << std::endl;
     candidates = aprioriMerge(subspaceVector(searchBeam));
     dim ++;
   }

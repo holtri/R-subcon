@@ -19,4 +19,3 @@ vector of local reachability densities
 \description{
 Calculates reachability distance for all objects
 }
-

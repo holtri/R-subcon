@@ -4,7 +4,7 @@
 \alias{HiCSSearch}
 \title{HiCS Search}
 \usage{
-HiCSSearch(indexMap, alpha, numRuns, topkSearch, topkOutput)
+HiCSSearch(indexMap, alpha, numRuns, topkSearch, topkOutput, seed = -1L)
 }
 \arguments{
 \item{alpha}{Percentage of data objects to remain in the subspace slice
@@ -33,10 +33,9 @@ according to the original publication and inspired by the nim-implemtation
 }
 \references{
 Keller, Fabian, Emmanuel Muller, and Klemens Bohm. 2012. HiCS:
-  High Contrast Subspaces for Density-Based Outlier Ranking. In 2012 IEEE
-  28th International Conference on Data Engineering, 1037 – 48. IEEE.
+  High Contrast Subspaces for Density-Based Outlier Ranking.
+  IEEE International Conference on Data Engineering, 2012
 }
 \seealso{
 \code{\link{HiCSContrastC}}, \code{\link{sortedIndexMatrix}}
 }
-

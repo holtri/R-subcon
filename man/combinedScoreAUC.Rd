@@ -19,4 +19,3 @@ Area under the ROC curve
 \description{
 Wrapper to calculate the AUC of a combined scoring.
 }
-

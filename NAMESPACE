@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
-useDynLib(subcon)
+useDynLib(subcon, .registration = TRUE)
 import(data.table)
 import(assertthat)

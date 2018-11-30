@@ -15,4 +15,3 @@ list containing the pairwise sum
 \description{
 Wrapper to sum of two lists
 }
-
