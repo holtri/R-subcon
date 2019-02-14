@@ -10,13 +10,13 @@ This package is an early stage and under development.
 
 ## Installation
 
-#####Prerequisites
+##### Prerequisites
 
 Install RTools https://cran.r-project.org/bin/windows/Rtools/
 
 Install devtools https://github.com/hadley/devtools
 
-#####Package installation from github
+##### Package installation from github
 ```R
 #as the package uses Rcpp with c++11, you might be required to set compiler options manually
 Sys.setenv("PKG_CXXFLAGS"="-std=c++0x")
@@ -29,13 +29,13 @@ devtools::install_github("holtri/R-subcon")
 
 Let's get started with a quick running example.
 
-#####Overview of functionality
+##### Overview of functionality
 
 ```R
 ?subcon
 ```
 
-#####Deviation measures
+##### Deviation measures
 
 ```R
 library(data.table)
@@ -58,7 +58,7 @@ deviationMatrixC(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 HiCSMatrixC(indexMap = indexMatrix, alpha = 0.1, numRuns = 100)
 ```
 
-#####Subspace search algorithms
+##### Subspace search algorithms
 
 ```R
 
@@ -75,7 +75,7 @@ outputSpaces <- CDSS(dm, tau=1)
 
 ```
 
-#####Subspace search evaluation
+##### Subspace search evaluation
 ```R
 # Calculate LOF score for subspaces
 lofactors <- lapply(outputSpaces, function(x) {
@@ -92,7 +92,7 @@ combinedScoreAUC(combinationFun = sumCombination, scores = lofactors, label = la
 redundancyAUC(lofactors, label, combinationFun = sumCombination, scaleFun = identity)
 ```
 
-##Using the package in Python
+## Using the package in Python
 
 R-packages can be used in Python with rpy2 which is an interface to R running embedded in a Python process. (http://rpy2.bitbucket.org/). It allows to create R objects in Python, which we can be manipulated both inside the R objects with R syntax or outside with Python syntax.
 
@@ -141,7 +141,7 @@ pandas.core.frame.DataFrame
 ```
 
 
-##References
+## References
 
 The package contains functions to search for subspaces in high dimensional data bases. The contrast defintion used in the code is based on [HiCS - High Contrast Subspaces for Density Based Outlier Ranking][1].
 
